@@ -1,6 +1,6 @@
 You are finishing "Groundwork", a one-person nonprofit website audit-and-repair service plus its landing page, so the owner can sell it.
 
-1. Find the repository: https://github.com/executiveusa/groundwork (if that URL 404s, ask me for the correct one before doing anything; do not create a substitute).
+1. Find the repository: https://github.com/executiveusa/groundwork- (the name really ends in a hyphen; if that URL 404s, ask me for the correct one before doing anything; do not create a substitute).
 2. Read docs/HANDOFF_FOR_CHATGPT.md first and follow it exactly. It lists what is already built (do not rebuild), the rules you must not break, the known gaps, and your jobs in order.
 3. Then read README.md, docs/ARCHITECTURE.md, docs/PRICING.md, landing/DESIGN_LOCK.md and skills/nonprofit-audit/SKILL.md.
 4. Run `pnpm install --ignore-workspace && pnpm test && pnpm typecheck && node bin/audit.mjs kb-check`. All must pass before you change anything.

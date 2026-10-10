@@ -3,7 +3,7 @@
 Paste this whole page to ChatGPT (or any coding assistant that can open the repo). It is self-contained and has no secrets. "Done" items are built and tested: do not rebuild them. Your job is the list under "Your jobs".
 
 ## What this is
-**Groundwork** is a one-person service and toolkit that audits and repairs nonprofit and social-purpose websites, checks legal basics and online listings, and gets organizations funder-ready. The owner uses it in-house to make money: free scan, then a $500 starter, full audit, repair sprint and monthly care. Repo: `nonprofit-audit-kit/` (TypeScript, Node 22, pnpm, zod v4, vitest). It started life as a local git repo inside another project; the first job is to give it its own GitHub home.
+**Groundwork** is a one-person service and toolkit that audits and repairs nonprofit and social-purpose websites, checks legal basics and online listings, and gets organizations funder-ready. The owner uses it in-house to make money: free scan, then a $500 starter, full audit, repair sprint and monthly care. Repo: https://github.com/executiveusa/groundwork- (note the trailing hyphen in the name; `gh repo clone executiveusa/groundwork-`). TypeScript, Node 22, pnpm, zod v4, vitest. All the work below is pushed to `main`. The repo is currently PUBLIC (see job 1).
 
 ## Already done (do NOT redo)
 - CLI (`node bin/audit.mjs`): `init`, `scan` (crawl + technical checks + IRS record), `search` (query plan; Firecrawl if `FIRECRAWL_API_KEY`), `presence`, `checklist`, `prompt` (writes a brief for Claude Code), `analyze` (Claude API, default model `claude-opus-5-5`), `report` (HTML, Markdown, CSV roadmap), `lookup-ein`, `find-org`, `kb-check`.
@@ -32,7 +32,7 @@ Paste this whole page to ChatGPT (or any coding assistant that can open the repo
 - Brand name "Groundwork" is chosen but not trademark-searched.
 
 ## Your jobs, in order
-1. **Give it a home.** The owner creates a new empty GitHub repo (name chosen by owner; suggest `groundwork`). Add it as a remote and push the existing history (`git remote add origin <url>`, `git push -u origin main`). Do not rewrite history. Confirm `clients/`, `.env` and `node_modules/` are not tracked.
+1. **Decide visibility.** The repo is public, which exposes the whole knowledge base (checklist, listings, legal question list, pricing notes) to competitors. Ask the owner whether to make it private (GitHub > Settings > Danger zone > Change visibility). Do not make it private or public yourself. Confirm `clients/`, `.env` and `node_modules/` are not tracked (they are git-ignored; client data must never be pushed).
 2. **Prove the engine on real sites.** With owner consent for each: run `init`, `scan`, `search`, `presence`, then `analyze` or `prompt`, then `report`. Fix any crash or bad output you find, add a test for each fix. Aim for 3 real runs before selling.
 3. **Make the report sellable.** Review one generated `report.html` as a client would: fix wording, order and print layout (A4/Letter). Add a one-page "funder checklist" export to the report if missing. Keep the disclaimer footer.
 4. **Finish the landing page.** Confirm with the owner: legal operator name, contact email, domain. Fill the privacy page, add a real email, change `robots.txt` and the `noindex` meta to allow indexing only when the owner says go. Add a simple sitemap and social share image. Re-run mobile checks (320, 390, 430, 768, 1280) and Lighthouse (accessibility >= 95).
