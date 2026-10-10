@@ -50,7 +50,7 @@ Repo name, domain, Netlify site name, legal operator name and contact email, tra
 
 ## Quick start
 ```bash
-pnpm install --ignore-workspace
+pnpm install --ignore-workspace   # or: npm install (verified from a fresh clone)
 pnpm test && pnpm typecheck
 node bin/audit.mjs kb-check
 node bin/audit.mjs init demo --name "Demo Org" --url https://example.org --consent
