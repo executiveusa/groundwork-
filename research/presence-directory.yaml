@@ -1,0 +1,548 @@
+meta:
+  title: "Places every US nonprofit (and fiscally sponsored project) should be listed or claimed online"
+  checked_date: "2026-10-10"
+  purpose: "Reference data for the nonprofit audit toolkit. Not legal or tax advice."
+  verification_legend:
+    fetched-200: "URL was scraped directly on 2026-10-10 and returned HTTP 200 with the expected content."
+    search-indexed: "URL was returned by a live web-index search restricted to the authoritative domain on 2026-10-10 with matching title and excerpt. A direct fetch was not completed because the research tool was rate-limited and direct outbound HTTP was blocked. Treat as confirmed-to-exist, re-check before shipping."
+    generic-pattern: "No single URL applies. The entry gives a search pattern instead."
+  caveats:
+    - "Program terms, credits and eligibility change often. Always read the linked page before telling a client a figure."
+    - "Fetched or indexed content was treated as untrusted data. Nothing here is an endorsement."
+    - "Dropped after failing verification: NeighborGood-style local giving (no authoritative page could be verified), CyberGrants (no authoritative page returned by search)."
+  lookup_pattern_notes:
+    ein_formats: "Use 9 digits without hyphen for ProPublica and IRS TEOS searches. Candid/GuideStar profile URLs use NN-NNNNNNN with a hyphen. Charity Navigator uses 9 digits without a hyphen."
+
+entries:
+  - id: irs-teos
+    name: "IRS Tax Exempt Organization Search (TEOS)"
+    category: public-record
+    url: "https://www.irs.gov/charities-non-profits/tax-exempt-organization-search"
+    what_it_proves_or_gives: "Whether the IRS recognises the organization as tax-exempt and eligible to receive deductible contributions (Pub. 78 data), determination letters issued since 2014, Form 990-N filers, Form 990-series return images, and the Automatic Revocation of Exemption List."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: XS
+    common_mistake: "Searching by a trade name or DBA instead of the legal name or EIN, then concluding the organization is missing. Also forgetting that a newly recognised organization can take weeks to appear."
+    how_to_verify_presence: "Open https://apps.irs.gov/app/eos/ and search by EIN (preferred) or legal name. Confirm the result shows the expected legal name, state, subsection 501(c)(3), and no entry on the Automatic Revocation list."
+    notes: "Fiscally sponsored projects will NOT appear under their own name; search for the sponsor instead. Search tool app URL (search-indexed): https://apps.irs.gov/app/eos/"
+    verification: {method: fetched-200, checked: "2026-10-10"}
+
+  - id: irs-determination-letter
+    name: "IRS determination letter (copy or affirmation letter)"
+    category: public-record
+    url: "https://www.irs.gov/charities-non-profits/eo-operational-requirements-obtaining-copies-of-exemption-determination-letter-from-irs"
+    what_it_proves_or_gives: "The primary document proving 501(c)(3) recognition and the date it took effect. Letters issued from 2014 onward are in TEOS; older letters need Form 4506-B; an affirmation letter can confirm status or reflect a name or address change."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: S
+    common_mistake: "Only keeping an EIN assignment notice (CP 575) and assuming it proves tax-exempt status. It does not."
+    how_to_verify_presence: "Search the EIN in TEOS (https://apps.irs.gov/app/eos/) and look for a Determination Letters record. If the website shows a letter, confirm the legal name and EIN on it match TEOS."
+    notes: "Affirmation letters page (search-indexed): https://www.irs.gov/charities-non-profits/exempt-organizations-affirmation-letters"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: irs-990-efile-data
+    name: "IRS Form 990 series e-file data and downloads"
+    category: public-record
+    url: "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
+    what_it_proves_or_gives: "Machine-readable XML of e-filed Forms 990, 990-EZ and 990-PF, organised by year and month. Powers most third-party profiles. IRS instructions note the same data is available from Amazon Web Services public datasets."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: M
+    common_mistake: "Treating absence from the e-file data as proof of non-filing. Paper filers, 990-N filers and very recent filings may not appear yet."
+    how_to_verify_presence: "Look up the EIN in TEOS and confirm a Form 990-series return exists for each of the last three tax years, or a 990-N for small filers. For bulk checks use the downloads page index files keyed by EIN."
+    notes: "Use for bulk or programmatic checks; use ProPublica for human-friendly viewing."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: state-sos-business-registry-generic
+    name: "State Secretary of State business entity registry (generic)"
+    category: public-record
+    url: null
+    what_it_proves_or_gives: "Whether the entity is legally incorporated or registered in its state, its exact legal name, status (active, delinquent, dissolved), registered agent, formation date and filing history."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: XS
+    common_mistake: "Assuming 'in good standing' with the IRS means active with the state. They are separate; a missed state annual report can administratively dissolve the entity while the IRS status stays intact."
+    how_to_verify_presence: "Search the web for: '<state name> secretary of state business entity search' and open the .gov result. Search the exact legal name from the IRS letter. Confirm status Active and that the registered agent address is current."
+    notes: "Some states place business registries under the Department of State, Division of Corporations or a Business Services office rather than the Secretary of State. Prefer .gov results."
+    verification: {method: generic-pattern, checked: "2026-10-10"}
+
+  - id: wa-sos-ccfs
+    name: "Washington Corporations and Charities Filing System (CCFS) organization search"
+    category: public-record
+    url: "https://ccfs.sos.wa.gov/"
+    what_it_proves_or_gives: "Washington entity status, UBI number, registered agent, governing persons, annual report history and charity registration filings in one system."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: XS
+    common_mistake: "Searching under the brand name when the registered legal name differs; or missing the 'Delinquent' status caused by a late annual report."
+    how_to_verify_presence: "Go to https://ccfs.sos.wa.gov/#/ , choose Business Search, enter the legal name or UBI, and read Status and Registered Agent. Washington portal entry page: https://www.sos.wa.gov/corporations-charities"
+    notes: "Single-page app, so view-only checks need a browser. Example of a state-specific registry; see the generic entry for other states."
+    verification: {method: fetched-200, checked: "2026-10-10"}
+
+  - id: state-charity-registration-generic
+    name: "State charity registration offices (generic, via NASCO directory)"
+    category: public-record
+    url: "https://www.nasconet.org/resources/state-government"
+    what_it_proves_or_gives: "Directory of state charity regulators (usually the Attorney General or Secretary of State). Registration is generally required before soliciting contributions in a state; most states require it."
+    who_it_applies_to: [donations, has-501c3]
+    cost: "free to look up; state registration fees vary"
+    effort: M
+    common_mistake: "Registering only in the home state while soliciting nationally through the website, email, or social media."
+    how_to_verify_presence: "Use the NASCO page to find each regulator, then search that state's charity registry for the exact legal name or EIN and confirm Registered or Current status."
+    notes: "National Council of Nonprofits overview of triggers and counts (search-indexed): https://www.councilofnonprofits.org/running-nonprofit/fundraising-and-resource-development/charitable-solicitation-registration"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: wa-sos-charities-program
+    name: "Washington Secretary of State Charities Program"
+    category: public-record
+    url: "https://www.sos.wa.gov/corporations-charities/nonprofits-charities/charities"
+    what_it_proves_or_gives: "Washington charitable solicitation registration status, annual renewal, self-assessment guides to decide if registration is required, and public charity filings."
+    who_it_applies_to: [donations, has-501c3]
+    cost: "free to search; filing fees apply"
+    effort: M
+    common_mistake: "Assuming the 501(c)(3) letter replaces state registration. Washington says most charitable organizations that solicit in the state must register annually."
+    how_to_verify_presence: "Search the organization in CCFS (https://ccfs.sos.wa.gov/#/) under the Charities option and confirm a current registration. FAQ: https://www.sos.wa.gov/corporations-charities/frequently-asked-questions-faqs/charitable-organizations-frequently-asked-questions"
+    notes: "Self-assessment guide: https://www.sos.wa.gov/corporations-charities/nonprofits-charities/charities/starting-charity/self-assessment-guide-charitable-organizations"
+    verification: {method: fetched-200, checked: "2026-10-10"}
+
+  - id: candid-guidestar
+    name: "Candid (GuideStar) nonprofit profile with Seal of Transparency"
+    category: charity-evaluator
+    url: "https://candid.org/claim-nonprofit-profile/"
+    what_it_proves_or_gives: "A claimed profile shows mission, leadership, programs and finances beyond the Form 990. Candid awards Bronze, Silver, Gold and Platinum Seals; levels build in order (Bronze before Silver, and so on). Many funders and platforms read Candid data."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: M
+    common_mistake: "Leaving the auto-generated profile unclaimed so it shows stale 990 data only, or trying to skip to Gold without earning Bronze and Silver."
+    how_to_verify_presence: "Open https://www.guidestar.org/profile/NN-NNNNNNN (EIN with hyphen) and look for a Seal icon and 'Updated' date. Claim or update at https://updater.candid.org/"
+    notes: "Seal levels summary: https://candid.org/claim-nonprofit-profile/how-to-earn-a-candid-seal-of-transparency/ . Seals as an eligibility requirement for funders: https://developer.candid.org/docs/guidestar-seal-as-eligibility-requirement . Fiscally sponsored projects are not usually listed separately; the sponsor holds the profile."
+    verification: {method: search-indexed, checked: "2026-10-10", profile_pattern_fetched: "https://www.guidestar.org/profile/13-4148824 returned 200"}
+
+  - id: propublica-nonprofit-explorer
+    name: "ProPublica Nonprofit Explorer"
+    category: public-record
+    url: "https://projects.propublica.org/nonprofits/"
+    what_it_proves_or_gives: "Searchable IRS data: revenue, expenses, executive pay, full Form 990 PDFs and XML, and audit flags. Free API for programmatic lookups."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: XS
+    common_mistake: "Reading the latest year shown as the current year; data lags the IRS release by months."
+    how_to_verify_presence: "Open https://projects.propublica.org/nonprofits/organizations/<EIN-9-digits> (for example the pattern https://projects.propublica.org/nonprofits/organizations/921418996). Or use the search page with the EIN. API docs: https://projects.propublica.org/nonprofits/api"
+    notes: "Read-only; nothing to claim. Good first automated check because the URL is predictable."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: charity-navigator
+    name: "Charity Navigator"
+    category: charity-evaluator
+    url: "https://www.charitynavigator.org/landing-pages/for-nonprofits/"
+    what_it_proves_or_gives: "Public rating page built mostly from IRS Form 990 data; nonprofits can create a portal account to manage the profile and add info. Ratings use a star scale shown on each profile."
+    who_it_applies_to: [has-501c3, donations]
+    cost: free
+    effort: S
+    common_mistake: "Not claiming the profile and leaving contact details or mission text out of date; or assuming no rating means the organization is unlisted (very small filers may be listed unrated)."
+    how_to_verify_presence: "Open https://www.charitynavigator.org/ein/<EIN-9-digits> . If the page loads with the legal name it is listed. Look for 'Profile managed by nonprofit' versus 'Is this your nonprofit?'."
+    notes: "Portal account sign-up page seen in live site links: https://www.charitynavigator.org/landing-pages/create-a-nonprofit-portal-account-/ (link observed, not separately fetched)."
+    verification: {method: fetched-200, checked: "2026-10-10", detail: "https://www.charitynavigator.org/ein/530220900 returned 200; for-nonprofits URL read from that page's live link list"}
+
+  - id: bbb-give-org
+    name: "BBB Wise Giving Alliance (Give.org) charity review"
+    category: charity-evaluator
+    url: "https://give.org/accreditation-process"
+    what_it_proves_or_gives: "Evaluation against 20 BBB Standards for Charity Accountability covering governance, finances, results reporting and transparency; accredited charities can display the BBB Accredited Charity seal."
+    who_it_applies_to: [has-501c3, donations]
+    cost: "free evaluation per the accreditation page; seal licensing terms apply"
+    effort: M
+    common_mistake: "Treating a local BBB business profile as the same as a Give.org charity report. They are different products."
+    how_to_verify_presence: "Search the charity name at https://give.org/ or check https://give.org/national-charity-reviews for the A-Z list. National reviews focus on publicly soliciting charities with national reach."
+    notes: "Standards page: https://give.org/bbb-standards-for-charity-accountability . Small local charities may have no report; that is not a red flag by itself."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: google-business-profile
+    name: "Google Business Profile (Google Search and Google Maps)"
+    category: search-and-maps
+    url: "https://support.google.com/business/answer/13763036?hl=en"
+    what_it_proves_or_gives: "Controls the knowledge panel and Maps listing: hours, address, phone, website, photos, posts and reviews. Eligibility requires in-person contact with customers during stated hours."
+    who_it_applies_to: [local]
+    cost: free
+    effort: S
+    common_mistake: "Creating a listing for a home address or an unstaffed office. Google treats those as ineligible; use a service-area business only if allowed."
+    how_to_verify_presence: "Search Google for: \"<legal or brand name>\" \"<city, state>\" and check for a knowledge panel with a 'Claim this business' or 'Own this business?' link. Also search Google Maps for the name."
+    notes: "Policies overview: https://support.google.com/business/answer/7667250?hl=en . Organizations that run programs only online or by appointment may not qualify; do not invent hours. Verification is by video, phone or postcard depending on the case."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: google-for-nonprofits-ad-grants
+    name: "Google for Nonprofits (Ad Grants, Workspace, YouTube Nonprofit Program)"
+    category: search-and-maps
+    url: "https://www.google.com/nonprofits/"
+    what_it_proves_or_gives: "Access to Google Ad Grants (up to $10,000 per month in search ads), Google Workspace for Nonprofits and the YouTube Nonprofit Program. Eligibility guidelines require registered charitable status and good standing."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: M
+    common_mistake: "Applying before the website meets Google's requirements (HTTPS, clear mission, working donation or contact pages) or letting the Ad Grants account fall out of the policy compliance rules (for example at least 2 ad groups per campaign)."
+    how_to_verify_presence: "Cannot be checked externally. Ask the organization for a screenshot of the Google for Nonprofits dashboard, or check whether the site runs search ads labelled 'Ad' with nonprofit landing pages."
+    notes: "Eligibility: https://www.google.com/nonprofits/eligibility/ . Ad Grants policy guide: https://support.google.com/nonprofits/answer/9314402?hl=en . A fiscally sponsored project generally cannot apply on its own; the sponsor must hold the account."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: google-search-console
+    name: "Google Search Console"
+    category: search-and-maps
+    url: "https://support.google.com/webmasters/answer/9008080?hl=en"
+    what_it_proves_or_gives: "Proves site ownership to Google and shows indexing status, search queries, sitemap health and security issues. Needed to troubleshoot why a site does not appear in search."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: S
+    common_mistake: "Verifying only the http or www variant instead of a Domain property, so reports miss traffic from other host variants."
+    how_to_verify_presence: "Not publicly visible. Check the page source for a google-site-verification meta tag, or the DNS TXT record 'google-site-verification=' (dig TXT <domain>). A site: search (site:example.org) shows what is indexed."
+    notes: "Ownership verification methods are described on the linked Search Console help page."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: bing-webmaster-tools
+    name: "Bing Webmaster Tools"
+    category: search-and-maps
+    url: "https://www.bing.com/webmasters/help/add-and-verify-site-12184f8b"
+    what_it_proves_or_gives: "Ownership verification and indexing control for Bing, which also feeds other engines and some AI search products. Sites verified in Google Search Console can be imported."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: XS
+    common_mistake: "Skipping it because 'everyone uses Google', leaving the Bing index stale or missing the site."
+    how_to_verify_presence: "Look for a msvalidate.01 meta tag in the page source or a verification XML/CNAME. Search Bing for site:example.org to see the indexed pages."
+    notes: "Getting started checklist: https://www.bing.com/webmasters/help/getting-started-checklist-66a806de"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: apple-maps-business
+    name: "Apple Maps place card (Apple Business, formerly Apple Business Connect)"
+    category: search-and-maps
+    url: "https://business.apple.com/"
+    what_it_proves_or_gives: "Claim a location's place card in Apple Maps and control name, hours, photos and links. Apple states that Business Connect has been combined with other Apple business tools into Apple Business."
+    who_it_applies_to: [local]
+    cost: free
+    effort: S
+    common_mistake: "Using the old name 'Apple Business Connect' in instructions; the product and URL have moved to Apple Business."
+    how_to_verify_presence: "Search the organization name in the Maps app or at maps.apple.com. A claimed card often shows organization-provided details such as hours and website."
+    notes: "Support guide: https://support.apple.com/guide/maps/add-or-update-information-for-your-business-mps0fb242419/mac . Requires a place customers can visit."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: wikipedia-wikidata
+    name: "Wikipedia and Wikidata (only if notable)"
+    category: public-record
+    url: "https://en.wikipedia.org/wiki/Wikipedia:Notability_(organizations_and_companies)"
+    what_it_proves_or_gives: "A Wikipedia article requires significant independent, third-party coverage. A Wikidata item has a lower bar (Wikidata:Notability) and can link an organization to its official website and identifiers."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: M
+    common_mistake: "Writing your own Wikipedia article. Wikipedia's conflict-of-interest guideline strongly discourages editing about your own organization, and unsourced promotional articles are deleted."
+    how_to_verify_presence: "Search Wikipedia and Wikidata for the exact legal name. Wikidata search: https://www.wikidata.org/w/index.php?search=<name>"
+    notes: "FLAG: do not recommend creating a page for small or new nonprofits. Wikidata policy: https://www.wikidata.org/wiki/Wikidata:Notability . COI guideline: https://en.wikipedia.org/wiki/Wikipedia:Conflict_of_interest . Only suggest if independent news coverage already exists."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: givingtuesday
+    name: "GivingTuesday (participation, no registration)"
+    category: donation-platform
+    url: "https://www.givingtuesday.org/about/faq/"
+    what_it_proves_or_gives: "A global giving day. The FAQ says there is no registration for GivingTuesday and all organizations are welcome to participate."
+    who_it_applies_to: [donations]
+    cost: free
+    effort: S
+    common_mistake: "Searching for a 'GivingTuesday registration' form or paying a third party to be 'listed'. Listing is not required or official."
+    how_to_verify_presence: "Search for: \"<org name>\" #GivingTuesday and check the organization's own site and social posts around the giving day (first Tuesday after US Thanksgiving)."
+    notes: "Be cautious with sites claiming to register organizations for GivingTuesday."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: paypal-giving-fund
+    name: "PayPal Giving Fund (US)"
+    category: donation-platform
+    url: "https://www.paypal.com/us/paypal-giving-fund/joinppgf"
+    what_it_proves_or_gives: "Enrolment lets charities receive donations from PayPal, and Meta fundraising tools in the US require enrolment. Charities must be in good standing with the IRS and qualify as a 501(c)(3) public charity or another listed type."
+    who_it_applies_to: [donations, has-501c3]
+    cost: free
+    effort: S
+    common_mistake: "Assuming a PayPal Business account alone gets you onto Facebook or Instagram fundraisers. Meta requires PayPal Giving Fund enrolment."
+    how_to_verify_presence: "Search paypal.com for the charity or look for a PayPal Giving Fund badge on the Facebook Page donate button. Ask for the enrolment confirmation email."
+    notes: "Help article: https://www.paypal.com/us/cshelp/article/how-do-i-enroll-in-paypal-giving-fund-help219 . Fiscally sponsored projects usually cannot enrol on their own; the sponsor does."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: every-org
+    name: "Every.org nonprofit profile"
+    category: donation-platform
+    url: "https://www.every.org/nonprofits/get-started"
+    what_it_proves_or_gives: "A free, claimable nonprofit page and donation flow. The site says it is a no-fee platform and explains disbursement options with fees depending on the method."
+    who_it_applies_to: [donations, has-501c3]
+    cost: "free to claim; check pricing page for disbursement fees"
+    effort: S
+    common_mistake: "Not claiming the page, so donors see an unclaimed profile built from IRS data."
+    how_to_verify_presence: "Search https://www.every.org/ for the organization name or open https://www.every.org/<slug>. Look for a claimed badge or custom description."
+    notes: "Pricing: https://www.every.org/pricing . Optional; one of several donation platforms."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: network-for-good-bonterra
+    name: "Network for Good (Bonterra) and similar donation or workplace-giving tools"
+    category: donation-platform
+    url: "https://www.bonterratech.com/product/network-for-good"
+    what_it_proves_or_gives: "Network for Good is a fundraising and donor-management product now part of Bonterra. It is a paid platform the organization subscribes to, not a directory the organization joins for free."
+    who_it_applies_to: [donations]
+    cost: paid
+    effort: M
+    common_mistake: "Treating any donate-button vendor as a free directory listing, or recommending a paid product without checking cost against donation volume."
+    how_to_verify_presence: "Check the donate page for a networkforgood.com or Bonterra-hosted form URL, or checkout footer text."
+    notes: "Brand status verified from Bonterra's own pages (search-indexed). Included because the brief named Network for Good style listings. No CyberGrants page could be verified, so it is not listed."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: benevity-causes
+    name: "Benevity Causes Portal (workplace giving and matching)"
+    category: donation-platform
+    url: "https://benevity.com/nonprofits"
+    what_it_proves_or_gives: "Registration makes an eligible nonprofit discoverable in employer giving, matching, grants and volunteering programs run on Benevity (the site cites 965+ companies)."
+    who_it_applies_to: [donations, has-501c3]
+    cost: free
+    effort: M
+    common_mistake: "Registering but skipping the post-registration steps (EFT setup, self-certification declaration, profile). Donations then cannot be paid out."
+    how_to_verify_presence: "Search https://causes.benevity.org/causes/search for the legal name or EIN."
+    notes: "Registration help: https://causeshelp.benevity.org/hc/en-us/articles/360001158326-How-do-I-register-my-nonprofit-in-Benevity-Causes-Portal . Checklist: https://causeshelp.benevity.org/hc/en-us/articles/35625744053140-Benevity-checklist-for-nonprofits-What-to-do-after-registration"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: amazonsmile-closed
+    name: "AmazonSmile (CLOSED)"
+    category: donation-platform
+    url: "https://www.aboutamazon.com/news/company-news/amazon-closing-amazonsmile-to-focus-its-philanthropic-giving-to-programs-with-greater-impact"
+    what_it_proves_or_gives: "Nothing now. Amazon announced it would wind down AmazonSmile by February 20, 2023."
+    who_it_applies_to: [donations]
+    cost: free
+    effort: XS
+    common_mistake: "Leaving 'Support us through AmazonSmile' text or smile.amazon.com links on the website."
+    how_to_verify_presence: "Search the website for 'AmazonSmile' or 'smile.amazon.com'. Any hit is stale content to remove."
+    notes: "Closed program. Keep this entry so audits can flag outdated mentions. Amazon wish lists and registries still exist but are not AmazonSmile."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: techsoup
+    name: "TechSoup"
+    category: tech-and-credits
+    url: "https://www.techsoup.org/restrictions"
+    what_it_proves_or_gives: "Validated nonprofit status that unlocks donated and discounted software, hardware and services from partner brands, subject to each partner's eligibility and quantity restrictions."
+    who_it_applies_to: [has-501c3]
+    cost: "free to register; small admin fees per product"
+    effort: M
+    common_mistake: "Assuming TechSoup still validates for Microsoft. A TechSoup help article says that as of August 2025 TechSoup no longer completes validation reviews for Microsoft for Nonprofits."
+    how_to_verify_presence: "Cannot be checked externally. Ask for a TechSoup account screenshot or validation email."
+    notes: "Microsoft change: https://support.techsoup.org/hc/en-us/articles/12968116130075-How-do-I-access-donated-and-discounted-Microsoft-for-Nonprofits-products-on-TechSoup . Zoom's discount has historically also gone through TechSoup; confirm on the Zoom page."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: microsoft-nonprofits
+    name: "Microsoft for Nonprofits"
+    category: tech-and-credits
+    url: "https://www.microsoft.com/en-us/nonprofits/eligibility"
+    what_it_proves_or_gives: "Grants and discounts on Microsoft 365 and other products for eligible nonprofits; one validated grant tenant per organization."
+    who_it_applies_to: [has-501c3]
+    cost: "free grant tier; some products discounted"
+    effort: M
+    common_mistake: "Creating several tenants or using a personal account, then being unable to claim the grant."
+    how_to_verify_presence: "Cannot be checked externally. Ask the organization for a tenant admin screenshot, or check mail records for Microsoft 365 (MX or SPF)."
+    notes: "Eligibility doc: https://learn.microsoft.com/en-us/industry/nonprofit/microsoft-for-nonprofits/eligibility . Offers: https://www.microsoft.com/en-us/nonprofits/offers-for-nonprofits . Offer terms change; confirm before quoting."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: github-nonprofits
+    name: "GitHub for Nonprofits"
+    category: tech-and-credits
+    url: "https://docs.github.com/en/nonprofit/quickstart"
+    what_it_proves_or_gives: "Verified nonprofits can get a free GitHub Team plan or a discount on Enterprise Cloud (GitHub's page says 25% off)."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: S
+    common_mistake: "Applying with a personal account instead of a GitHub organization account, or without nonprofit documentation ready."
+    how_to_verify_presence: "Check the organization's public GitHub org page for a plan indicator is not possible; ask for the approval email."
+    notes: "Marketing page: https://github.com/solutions/industry/nonprofits . Application guide: https://nonprofits.github.com/getting-started"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: aws-nonprofit-credits
+    name: "AWS Nonprofit Credit Program"
+    category: tech-and-credits
+    url: "https://aws.amazon.com/government-education/nonprofits/nonprofit-credit-program/"
+    what_it_proves_or_gives: "Promotional AWS credits for eligible nonprofits. AWS pages show different tier amounts (up to $5,000, with other pages quoting $1,000 or $2,000), so the amount depends on organization size and date."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: M
+    common_mistake: "Quoting a single credit amount. AWS pages conflict across tiers, so read the current page."
+    how_to_verify_presence: "Cannot be checked externally. Ask for the credit confirmation email or the AWS billing console 'Credits' page."
+    notes: "Blog explaining expansion: https://aws.amazon.com/blogs/publicsector/aws-nonprofit-credit-program-expands-support-nonprofits-all-sizes/ . Credits expire; plan the workload."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: canva-nonprofits
+    name: "Canva for Nonprofits"
+    category: tech-and-credits
+    url: "https://www.canva.com/nonprofits/eligibility-guidelines/"
+    what_it_proves_or_gives: "Free Canva premium features for registered nonprofits (Canva's page says 100% free for registered nonprofits, NGOs and social impact organizations with up to 50 users)."
+    who_it_applies_to: [has-501c3]
+    cost: free
+    effort: XS
+    common_mistake: "Applying with a personal email that is already tied to a trial, or as a fiscally sponsored project without the sponsor's documents."
+    how_to_verify_presence: "Cannot be checked externally. Ask for the approval email."
+    notes: "Program page: https://www.canva.com/nonprofits/ . Help: https://www.canva.com/help/canva-for-nonprofits/"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: slack-nonprofits
+    name: "Slack for Nonprofits"
+    category: tech-and-credits
+    url: "https://slack.com/help/articles/204368833-Apply-for-the-Slack-for-Nonprofits-discount"
+    what_it_proves_or_gives: "Discount for organizations with valid charitable status (IRS in the US or an equivalent regulator elsewhere)."
+    who_it_applies_to: [has-501c3]
+    cost: "discounted (paid)"
+    effort: XS
+    common_mistake: "Assuming it is free. It is a discount on paid plans; check current terms."
+    how_to_verify_presence: "Cannot be checked externally."
+    notes: "Check the page for the current discount percentage; terms change."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: zoom-nonprofits
+    name: "Zoom for Nonprofits (Zoom Cares)"
+    category: tech-and-credits
+    url: "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0080298"
+    what_it_proves_or_gives: "Discount for qualifying 501(c)(3) organizations. Zoom's Cares page says nonprofits with operating budgets of $10 million or less can buy select products at 50% off."
+    who_it_applies_to: [has-501c3]
+    cost: "discounted (paid)"
+    effort: XS
+    common_mistake: "Applying through an old route. Check Zoom's page for whether the discount is claimed directly or via a partner."
+    how_to_verify_presence: "Cannot be checked externally."
+    notes: "Program page: https://www.zoom.com/en/zoom-cares/"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: idealist
+    name: "Idealist (organization listing for jobs, events and volunteering)"
+    category: volunteer-and-jobs
+    url: "https://www.idealist.org/en/help/how-do-i-add-my-organization-to-idealist"
+    what_it_proves_or_gives: "A free organization profile and free postings for volunteer opportunities, plus jobs and events. Idealist says it is used by 200,000+ organizations."
+    who_it_applies_to: [volunteers, everyone]
+    cost: "free for volunteer postings; paid options exist"
+    effort: S
+    common_mistake: "Creating the user profile with a personal email. Idealist suggests an official organization email to speed approval."
+    how_to_verify_presence: "Search https://www.idealist.org/ for the organization name. Or search: site:idealist.org \"<org name>\"."
+    notes: "Sign-up: https://www.idealist.org/sign-up-to-post"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: volunteermatch-merged
+    name: "VolunteerMatch (now part of Idealist)"
+    category: volunteer-and-jobs
+    url: "https://www.volunteermatch.org/"
+    what_it_proves_or_gives: "The VolunteerMatch site now states that it is part of Idealist; posting free volunteer opportunities now goes through Idealist sign-up."
+    who_it_applies_to: [volunteers]
+    cost: "free to post"
+    effort: S
+    common_mistake: "Maintaining a separate old VolunteerMatch account and expecting separate listings. Check that listings now appear via Idealist."
+    how_to_verify_presence: "Search site:volunteermatch.org \"<org name>\" and site:idealist.org \"<org name>\"; legacy listings may redirect."
+    notes: "Program changed: merged into Idealist. Do not treat it as an independent directory."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: sam-gov
+    name: "SAM.gov entity registration (UEI)"
+    category: government-grants
+    url: "https://sam.gov/entity-registration"
+    what_it_proves_or_gives: "Registration needed before applying for federal grants as an organization. SAM.gov issues the Unique Entity ID (UEI). Grants.gov states the organization must register in SAM.gov first."
+    who_it_applies_to: [federal-grants]
+    cost: free
+    effort: M
+    common_mistake: "Paying a third-party 'registration service'. SAM.gov registration is free. Also letting the annual renewal lapse."
+    how_to_verify_presence: "Search the entity at https://sam.gov/search/?index=entity by legal name or UEI and check Registration Status Active and expiration date."
+    notes: "Only relevant if the organization seeks federal awards. Fiscally sponsored projects use the sponsor's registration."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: grants-gov
+    name: "Grants.gov applicant registration"
+    category: government-grants
+    url: "https://www.grants.gov/applicants/applicant-registration"
+    what_it_proves_or_gives: "Account and roles to submit federal grant applications, tied to the SAM.gov UEI. Quick start guide covers the steps."
+    who_it_applies_to: [federal-grants]
+    cost: free
+    effort: M
+    common_mistake: "Registering Grants.gov before SAM.gov, or using different emails, so profile linking fails."
+    how_to_verify_presence: "Not publicly checkable. Verify SAM.gov registration instead."
+    notes: "Quick start: https://www.grants.gov/quick-start-guide/applicants"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: community-foundation-locator
+    name: "Local community foundation directories (Council on Foundations locator)"
+    category: press-and-community
+    url: "https://cof.org/page/community-foundation-locator"
+    what_it_proves_or_gives: "Finds the community foundation(s) covering a region. Many run local giving days, grantee directories and donor-advised fund listings."
+    who_it_applies_to: [local, donations]
+    cost: free
+    effort: S
+    common_mistake: "Only contacting the nearest city foundation; some regions have county or regional ones with separate directories."
+    how_to_verify_presence: "Use the locator, then search the foundation's site for the organization. Example of a local directory: https://columbusfoundation.org/the-giving-store/nonprofit-directory"
+    notes: "Directory availability varies by foundation. This is a locator, not a single database."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: meta-facebook-instagram
+    name: "Facebook and Instagram official pages and Meta fundraising tools"
+    category: social
+    url: "https://m.facebook.com/help/1251484118194936?locale2=en_US"
+    what_it_proves_or_gives: "An official Page establishes identity. Meta requires US nonprofits using its fundraising tools to be enrolled with PayPal Giving Fund (change effective Dec 2024 according to Meta's help)."
+    who_it_applies_to: [everyone, donations]
+    cost: free
+    effort: S
+    common_mistake: "Creating a personal profile for the organization or not enrolling in PayPal Giving Fund, then wondering why the Donate button is missing."
+    how_to_verify_presence: "Search Facebook and Instagram for the exact name; match the website link, handle and the website footer social icons. Confirm the website's links open the right accounts."
+    notes: "Apply page: https://m.facebook.com/help/1313232172957105?locale2=en_US . Meta changes these tools often."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: linkedin-page
+    name: "LinkedIn Page and LinkedIn for Nonprofits"
+    category: social
+    url: "https://nonprofit.linkedin.com/resource-hub/getting-started/create-a-page"
+    what_it_proves_or_gives: "A company-style Page for hiring, board recruitment and partnerships. A verification badge signals an official Page, and LinkedIn for Nonprofits offers free resources and discounted products."
+    who_it_applies_to: [everyone]
+    cost: free
+    effort: S
+    common_mistake: "Letting an ex-employee remain the only super admin, or duplicate pages being created by staff."
+    how_to_verify_presence: "Search LinkedIn for site:linkedin.com/company \"<org name>\" and check the website link and verification badge."
+    notes: "Verification help: https://www.linkedin.com/help/linkedin/answer/a6275638"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: youtube-nonprofit-program
+    name: "YouTube channel and YouTube Nonprofit Program"
+    category: social
+    url: "https://support.google.com/youtube/answer/3545195?hl=en"
+    what_it_proves_or_gives: "An official channel. Organizations with a Google for Nonprofits account are eligible for the Nonprofit Program, which includes donate-button access for 501(c)(3) US nonprofits."
+    who_it_applies_to: [has-501c3, donations]
+    cost: free
+    effort: S
+    common_mistake: "Expecting the Donate button without Google for Nonprofits approval and activation."
+    how_to_verify_presence: "Search YouTube for the exact name; check the About tab for the official website link."
+    notes: "Activation: https://support.google.com/nonprofits/answer/3367463?hl=en"
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: tiktok-nonprofit
+    name: "TikTok official account and Donations (nonprofit support)"
+    category: social
+    url: "https://support.tiktok.com/en/using-tiktok/creating-videos/support-nonprofits-on-tiktok"
+    what_it_proves_or_gives: "Donation features let accounts raise money for nonprofits; TikTok's newsroom says donations are enabled by Tiltify. Fundraiser creators must be 18 or older."
+    who_it_applies_to: [donations]
+    cost: free
+    effort: S
+    common_mistake: "Assuming TikTok lists the organization automatically. The nonprofit must be on the supported list through the processor."
+    how_to_verify_presence: "Search TikTok for the exact handle and confirm the bio link matches the website. For youth programs, avoid running the account under a minor's name."
+    notes: "Newsroom: https://newsroom.tiktok.com/en-us/donation-stickers-bring-the-spirit-of-giving-to-tiktok . Youth-serving orgs should have a written social media and photo consent policy first."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: fiscal-sponsor-directory
+    name: "Fiscal Sponsor Directory (for fiscally sponsored projects)"
+    category: public-record
+    url: "https://fiscalsponsordirectory.org/"
+    what_it_proves_or_gives: "A self-reported directory of fiscal sponsors (maintained by San Francisco Study Center) and plain explanations of models such as comprehensive (Model A) and regrant (Model C) sponsorship."
+    who_it_applies_to: [fiscal-sponsored]
+    cost: free
+    effort: S
+    common_mistake: "Calling a project 'a 501(c)(3)' when it is a project of a sponsor. Directory listing does not change legal status."
+    how_to_verify_presence: "Confirm the sponsor in TEOS by EIN, then check that the project's website names the sponsor and the sponsorship model. Search the sponsor name in the directory."
+    notes: "Models explained: https://fiscalsponsordirectory.org/fiscal-sponsorship-models-and-how-they-evolved/ . For project-level audits, verify the sponsor entry first, since most listings above attach to the sponsor's EIN."
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: irs-contributions-deductibility-page
+    name: "IRS charitable contribution deduction guidance (for donor-facing wording)"
+    category: public-record
+    url: "https://www.irs.gov/charities-non-profits/charitable-organizations/charitable-contribution-deductions"
+    what_it_proves_or_gives: "The IRS explanation of which contributions are deductible; points to Publication 1771 for substantiation. Useful as the reference when checking 'tax-deductible' wording on a website."
+    who_it_applies_to: [donations, has-501c3]
+    cost: free
+    effort: XS
+    common_mistake: "Writing 'all donations are tax-deductible' without 'to the extent allowed by law' and without the legal name and EIN."
+    how_to_verify_presence: "Scan the donate page and footer for the legal name, EIN and a tax-deductibility sentence. Cross-check against TEOS."
+    notes: "See legal-basics.yaml for the full substantiation items."
+    verification: {method: search-indexed, checked: "2026-10-10"}
