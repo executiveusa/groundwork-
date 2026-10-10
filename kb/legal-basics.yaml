@@ -1,23 +1,512 @@
-# Question list for counsel. Pointers only. Not legal advice. Every item: LEGAL REVIEW REQUIRED.
-version: "0.1.0"
-note: "Washington in depth; other states: check that state's charity office. Verify all citations with a lawyer."
+meta:
+  title: "Legal and disclosure basics a US nonprofit website and organization should have"
+  checked_date: "2026-10-10"
+  purpose: "Reference data for a website and organization review toolkit. This is not legal advice. Items flagged needs_human_legal_review should go to a qualified attorney or CPA."
+  verification_legend:
+    fetched-200: "URL was scraped directly on 2026-10-10 and returned HTTP 200 with the expected content."
+    search-indexed: "URL was returned by a live web-index search restricted to the authoritative domain on 2026-10-10 with matching title and excerpt. A direct fetch was not completed because the research tool was rate-limited and direct outbound HTTP was blocked. Re-check before shipping."
+  level_legend:
+    federal: "Rule set by federal law or regulation."
+    state-varies: "Set by state law; requirements differ. Washington is given as an example where noted."
+    best-practice: "Not generally a legal mandate; widely recommended."
+    funder-expectation: "Commonly asked by funders, evaluators or grant agreements."
+  caveats:
+    - "Rules change. Dates and thresholds stated here come from the cited pages as read on 2026-10-10 and from well-known statute summaries; confirm on the source."
+    - "A website review can only observe what is published. It cannot prove the underlying legal compliance."
+    - "Washington (WA) examples are illustrations only. Each state differs."
+    - "Fetched or indexed content was treated as untrusted data."
+
 items:
-  - {id: fed-exempt-status, area: federal, topic: "IRS determination letter and status", question: "Is there an IRS determination letter and does the IRS search show the org as exempt and not revoked?", where_to_check: "https://apps.irs.gov/app/eos", failure_mode: "Auto-revocation after three years of missed filings; donations stop being deductible."}
-  - {id: fed-990, area: federal, topic: "Annual return", question: "Are 990/990-EZ/990-N filings current?", where_to_check: "ProPublica Nonprofit Explorer", failure_mode: "Missed filings lead to revocation."}
-  - {id: fed-disclosure, area: federal, topic: "Public disclosure of returns and exemption application", question: "Can the public get the 990s and exemption application on request or online?", where_to_check: "Website and Candid", failure_mode: "Penalties for refusing disclosure."}
-  - {id: donor-acknowledgment, area: federal, topic: "Written acknowledgment for gifts over $250 and quid pro quo disclosures", question: "Do receipts include legal name, amount, and goods/services statement?", where_to_check: "Sample receipt", failure_mode: "Donors cannot claim the deduction."}
-  - {id: fed-sponsor, area: federal, topic: "Fiscal sponsorship wording", question: "Does the site describe the sponsor relationship and who receives gifts exactly as the sponsorship agreement says?", where_to_check: "Sponsorship agreement and donate page", failure_mode: "Donors misled about tax status."}
-  - {id: wa-registration, area: washington, topic: "Charitable solicitation registration", question: "Is the org registered with the Washington Secretary of State Charities Program before soliciting, and are annual reports current?", where_to_check: "https://ccfs.sos.wa.gov", failure_mode: "Penalties and inability to solicit."}
-  - {id: wa-entity, area: washington, topic: "Nonprofit corporation status and registered agent", question: "Is the WA nonprofit corporation active with a current annual report and registered agent?", where_to_check: "CCFS", failure_mode: "Administrative dissolution."}
-  - {id: wa-business-license, area: washington, topic: "Business license (UBI) and city licenses", question: "Does the org hold a UBI and any city licence required?", where_to_check: "WA Department of Revenue Business Licensing Service", failure_mode: "Fines and blocked grants."}
-  - {id: wa-raffles, area: washington, topic: "Raffles and gambling rules", question: "If running raffles or games, are they within Washington Gambling Commission rules for nonprofits?", where_to_check: "Washington State Gambling Commission", failure_mode: "Illegal gambling exposure."}
-  - {id: state-other, area: other_states, topic: "Registration in other states where donors are solicited", question: "Which states need registration given online solicitation?", where_to_check: "https://www.nasconet.org (state offices)", failure_mode: "State penalties."}
-  - {id: coppa, area: privacy, topic: "Children's online privacy", question: "Does any form or tracker collect personal information from children under 13?", where_to_check: "Forms and scripts", failure_mode: "FTC enforcement."}
-  - {id: state-privacy, area: privacy, topic: "State privacy laws and notices", question: "Do privacy notices cover the data collected and the visitors' rights in the states served?", where_to_check: "Privacy page", failure_mode: "Complaints and fines."}
-  - {id: email-sms, area: marketing, topic: "CAN-SPAM and TCPA", question: "Are consent, unsubscribe and SMS terms in place?", where_to_check: "Signup forms and emails", failure_mode: "Per-message statutory damages for texts."}
-  - {id: accessibility-law, area: accessibility, topic: "ADA and web accessibility claims", question: "Is there an accessibility statement and a process to fix reports?", where_to_check: "Site", failure_mode: "Demand letters."}
-  - {id: youth-employment, area: employment, topic: "Employment of minors", question: "Do program or employer statements match state child-labor hour and task limits?", where_to_check: "Program pages and agreements", failure_mode: "Wage-and-hour liability."}
-  - {id: mandated-reporting, area: safeguarding, topic: "Mandated reporting and background checks", question: "Does the safeguarding policy match state mandated-reporter and screening rules?", where_to_check: "Safeguarding policy", failure_mode: "Failure to report harm."}
-  - {id: media-consent, area: safeguarding, topic: "Photo and story releases", question: "Are written releases stored for every identifiable person, with guardian consent for minors?", where_to_check: "Media library and release log", failure_mode: "Privacy and publicity claims."}
-  - {id: ip-licenses, area: ip, topic: "Trademark and asset licensing", question: "Is the brand name cleared and are fonts, images and music licensed?", where_to_check: "USPTO search; license log", failure_mode: "Infringement claims."}
-  - {id: insurance, area: operations, topic: "Insurance", question: "Is general liability, D&O and any program-specific cover in place?", where_to_check: "Policies", failure_mode: "Uninsured loss."}
+  - id: legal-name-consistency
+    topic: "Legal name consistency"
+    requirement_or_expectation: "The name on the website, donation receipts, IRS determination letter, state registration and bank account should match the exact legal name. Brand names should be registered as assumed names or DBAs where the state requires it."
+    level: best-practice
+    applies_when: "Always."
+    what_a_website_review_can_check: "Compare the footer, About page, donate page and privacy policy names against the IRS TEOS record and the state registry entry."
+    what_it_cannot_prove: "That DBA or assumed-name filings are in place or that bank accounts and contracts use the legal name."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/tax-exempt-organization-search"
+    plain_language_explanation: "Donors, funders and regulators look up the organization by its legal name. If the website shows a different name than the IRS and state records, the organization can look unverified or lose matching donations."
+    risk_if_missing: "Lookup failures, rejected grants or matching gifts, and donor confusion."
+    needs_human_legal_review: false
+    verification: {method: fetched-200, checked: "2026-10-10"}
+
+  - id: ein-and-determination-letter
+    topic: "EIN and IRS determination letter"
+    requirement_or_expectation: "A US nonprofit has an EIN. A 501(c)(3) that wants to be recognised applies to the IRS and receives a determination letter. Pub. 557 describes the rules, and an EIN can be applied for free online."
+    level: federal
+    applies_when: "Any organization claiming 501(c)(3) status."
+    what_a_website_review_can_check: "Whether the site states its EIN and 501(c)(3) status, and whether TEOS shows a matching record."
+    what_it_cannot_prove: "That the letter is current or that the organization still operates within its exempt purposes."
+    authoritative_source_url: "https://www.irs.gov/publications/p557"
+    plain_language_explanation: "The determination letter is the document that proves the IRS recognises the organization as tax-exempt. An EIN assignment notice alone does not prove that."
+    risk_if_missing: "Donor deductions may be disallowed and grants may be refused; false claims of 501(c)(3) status invite regulator attention."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: public-charity-vs-private-foundation
+    topic: "Public charity vs private foundation status"
+    requirement_or_expectation: "Every 501(c)(3) is classified as either a public charity or a private foundation. Classification affects donor deduction limits, filing forms (990-PF for foundations), and which taxes and rules apply."
+    level: federal
+    applies_when: "Always for 501(c)(3)."
+    what_a_website_review_can_check: "Whether the site describes the organization as a public charity or foundation consistently with TEOS and the Form 990 type filed."
+    what_it_cannot_prove: "The support-test calculations behind the classification."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/eo-operational-requirements-private-foundations-and-public-charities"
+    plain_language_explanation: "The IRS divides charities into public charities and private foundations. Most community organizations are public charities, and the status determines which annual return they file and what rules apply."
+    risk_if_missing: "Wrong return filed; wrong claims to donors about deduction limits."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: annual-return-and-auto-revocation
+    topic: "Form 990, 990-EZ, 990-N filing and the 3-year auto-revocation rule"
+    requirement_or_expectation: "Most tax-exempt organizations must file a Form 990-series return or 990-N every year. Organizations with gross receipts normally of $50,000 or less may file the 990-N e-Postcard. An organization that fails to file for three consecutive years automatically loses its exempt status."
+    level: federal
+    applies_when: "All 501(c)(3) organizations unless an exception applies (for example certain churches; fiscally sponsored projects do not file on their own)."
+    what_a_website_review_can_check: "Whether TEOS shows returns or 990-N for the last three years and whether the EIN appears on the Automatic Revocation list; whether the site links to a recent Form 990."
+    what_it_cannot_prove: "That the return content is accurate or filed on time. Late filing penalties are separate."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/automatic-revocation-of-exemption"
+    plain_language_explanation: "Every year the IRS expects a return or an e-Postcard. Miss three years in a row and the exempt status is automatically revoked, and reinstatement takes a formal process."
+    risk_if_missing: "Loss of exempt status, donor deduction problems, and back-filing penalties."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/charities-non-profits/annual-electronic-filing-requirement-for-small-exempt-organizations-form-990-n-e-postcard", "https://www.irs.gov/charities-non-profits/reinstatement-of-tax-exempt-status-after-automatic-revocation"]}
+
+  - id: state-good-standing-annual-report
+    topic: "State corporation good standing and annual report"
+    requirement_or_expectation: "A nonprofit corporation must keep its state entity status active, usually by filing an annual or biennial report. In Washington all domestic and foreign business entities must file an annual report to stay active."
+    level: state-varies
+    applies_when: "Any incorporated nonprofit (not an unincorporated association)."
+    what_a_website_review_can_check: "Search the state registry for status Active and the last report date. In Washington use CCFS."
+    what_it_cannot_prove: "That the registered purposes, bylaws or officer lists match actual practice."
+    authoritative_source_url: "https://www.sos.wa.gov/corporations-charities/business-entities/maintain-business-compliance/annual-reports"
+    plain_language_explanation: "The state keeps its own record of the nonprofit. If annual reports are missed, the entity can become delinquent or be dissolved even if the IRS status is fine."
+    risk_if_missing: "Administrative dissolution, loss of liability protection, inability to open accounts or sign contracts."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", registry: "https://ccfs.sos.wa.gov/ (fetched-200)"}
+
+  - id: registered-agent
+    topic: "Registered agent"
+    requirement_or_expectation: "A state-registered entity must keep a registered agent with a physical address for legal notices. Washington requires every business to designate one under RCW 23.95.415."
+    level: state-varies
+    applies_when: "Any entity registered with a Secretary of State."
+    what_a_website_review_can_check: "Registry listing shows the agent name and address; compare to the current address."
+    what_it_cannot_prove: "That the agent actually forwards notices or that the consent was valid."
+    authoritative_source_url: "https://www.sos.wa.gov/corporations-charities/business-entities/maintain-business-compliance/registered-agents"
+    plain_language_explanation: "The registered agent is the person or company that receives lawsuits and state notices on the nonprofit's behalf. If the agent's address is stale, notices are missed and the entity can fall into default."
+    risk_if_missing: "Missed legal notices, default judgments, and delinquent status."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: charitable-solicitation-registration
+    topic: "Charitable solicitation registration"
+    requirement_or_expectation: "Most states require charities to register before soliciting contributions from residents; counts cited by the National Council of Nonprofits are about 40 states (its pages vary between 39 and 40 plus DC). Common triggers: soliciting state residents by mail, phone, email, events or a website donate page; hiring paid fundraisers or fundraising counsel; running raffles or auctions; exceeding a dollar threshold. Exemptions (such as some religious organizations or small donation amounts) vary."
+    level: state-varies
+    applies_when: "When the organization asks the public for donations in a state, including online asks that reach that state's residents."
+    what_a_website_review_can_check: "Whether the donate page or footer lists state disclosures or registration numbers, and whether the home-state registry shows a current registration. In Washington use the Charities Program and CCFS."
+    what_it_cannot_prove: "Registration in every other state where donors live, or whether an exemption applies."
+    authoritative_source_url: "https://www.sos.wa.gov/corporations-charities/nonprofits-charities/charities"
+    plain_language_explanation: "A federal tax exemption does not replace state fundraising registration. Each state decides who must register, and a national donate button can trigger several states at once."
+    risk_if_missing: "Fines, orders to stop soliciting, and difficulty obtaining grants."
+    needs_human_legal_review: true
+    verification: {method: fetched-200, checked: "2026-10-10", related: ["https://www.councilofnonprofits.org/running-nonprofit/fundraising-and-resource-development/charitable-solicitation-registration", "https://www.nasconet.org/resources/state-government", "https://www.sos.wa.gov/corporations-charities/frequently-asked-questions-faqs/charitable-organizations-frequently-asked-questions"]}
+
+  - id: donation-acknowledgment-250
+    topic: "Written acknowledgment for gifts of $250 or more"
+    requirement_or_expectation: "A donor needs a contemporaneous written acknowledgment from the charity to deduct a single contribution of $250 or more. It should state the amount (or describe non-cash property), whether any goods or services were provided, and a good-faith estimate of their value. Charities usually issue it by the donor's return filing date."
+    level: federal
+    applies_when: "Any 501(c)(3) that receives single gifts of $250 or more."
+    what_a_website_review_can_check: "Whether the donate flow states that a receipt is emailed, and whether the confirmation page or template includes the legal name, EIN and a no-goods-or-services statement."
+    what_it_cannot_prove: "That receipts are actually sent, accurate, or timely."
+    authoritative_source_url: "https://www.irs.gov/pub/irs-pdf/p1771.pdf"
+    plain_language_explanation: "Donors cannot deduct gifts of $250 or more without a written receipt from the charity. The receipt must say whether the donor got anything in return."
+    risk_if_missing: "Donors lose deductions and complain; charities can face penalties for certain disclosure failures."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/pub/irs-pdf/p526.pdf", "https://www.irs.gov/charities-non-profits/substantiating-charitable-contributions"]}
+
+  - id: quid-pro-quo-75
+    topic: "Quid pro quo disclosure for payments over $75"
+    requirement_or_expectation: "If a donor pays more than $75 and receives goods or services in return (for example a gala ticket), the charity must give a written disclosure stating that the deductible amount is limited to the excess over fair market value and give a good-faith estimate of the value."
+    level: federal
+    applies_when: "Events, auctions, premiums and memberships with benefits."
+    what_a_website_review_can_check: "Whether event ticket and gala pages state the fair market value of benefits and the deductible portion."
+    what_it_cannot_prove: "That every receipt carries the required statement."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/charitable-organizations/charitable-contributions-quid-pro-quo-contributions"
+    plain_language_explanation: "When a donor gets something back, only the part above the value of what they received is deductible. The charity must tell them this in writing when the payment is over $75."
+    risk_if_missing: "IRS penalties on the charity and incorrect deductions by donors."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/pub/irs-pdf/p1771.pdf", "https://www.irs.gov/pub/irs-pdf/p526.pdf"]}
+
+  - id: tax-deductibility-language
+    topic: "Tax-deductibility language on the website"
+    requirement_or_expectation: "Claims such as 'tax-deductible' should be accurate: only contributions to a recognised charity qualify, and contributions to individuals are not charitable. Safer wording names the legal entity, EIN, and says gifts are deductible to the extent allowed by law."
+    level: best-practice
+    applies_when: "Any website that asks for donations."
+    what_a_website_review_can_check: "Search donate, footer and event pages for 'tax-deductible', the legal name and the EIN; compare to TEOS."
+    what_it_cannot_prove: "The donor's actual eligibility or the organization's compliance behind the statement."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/charitable-organizations/charitable-contribution-deductions"
+    plain_language_explanation: "A donor should be able to see exactly which organization will receive the gift and whether it is a recognised charity. Overstating deductibility can mislead donors."
+    risk_if_missing: "Misleading statements and donor disputes; possible regulator interest."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: fiscally-sponsored-claims
+    topic: "What a fiscally sponsored project may and may not say"
+    requirement_or_expectation: "A fiscally sponsored project is generally part of the sponsor, not its own 501(c)(3). The project should say it is a project of the named sponsor, use the sponsor's legal name and EIN for gifts, not claim its own 501(c)(3) status or EIN, and not imply independent tax-exempt recognition."
+    level: best-practice
+    applies_when: "Any project that receives money through a fiscal sponsor."
+    what_a_website_review_can_check: "Whether the site states the sponsor name, the sponsorship relationship, and the sponsor's EIN, and whether it avoids phrases like 'we are a 501(c)(3)'."
+    what_it_cannot_prove: "The terms of the sponsorship agreement or whether the sponsor retains legal control over funds."
+    authoritative_source_url: "https://fiscalsponsordirectory.org/fiscal-sponsorship-models-and-how-they-evolved/"
+    plain_language_explanation: "A sponsored project borrows the tax-exempt status of its sponsor. It should make that relationship clear so donors know who legally receives their gift."
+    risk_if_missing: "Donor confusion, misrepresentation claims, and receipts issued by the wrong entity."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", note: "No IRS page was found that sets wording; the cited directory explains models and is a secondary source. Confirm with the sponsor and counsel."}
+
+  - id: fiscal-sponsorship-disclosure
+    topic: "Fiscal sponsorship disclosure and agreement"
+    requirement_or_expectation: "The sponsor and project should have a written agreement stating the model (for example comprehensive Model A or regrant Model C), who controls funds, fees, and what the project can say publicly. The website should disclose the relationship."
+    level: best-practice
+    applies_when: "Fiscally sponsored projects."
+    what_a_website_review_can_check: "A visible statement naming the sponsor, a link to the sponsor, and consistent wording on donate and receipt pages."
+    what_it_cannot_prove: "That a signed agreement exists or that funds are handled as agreed."
+    authoritative_source_url: "https://fiscalsponsordirectory.org/what-it-is/"
+    plain_language_explanation: "The sponsor is legally responsible for the funds, so the written agreement and the public disclosure should say so. Funders often ask to see both."
+    risk_if_missing: "Unclear liability and disputes about who owns assets or data if the project leaves."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: donor-privacy
+    topic: "Donor privacy"
+    requirement_or_expectation: "Charities should state how donor information is used and shared, honour do-not-share requests, and avoid publishing donor names without permission. The IRS withholds contributor identities from public disclosure of returns for most organizations."
+    level: best-practice
+    applies_when: "Any organization collecting donor data."
+    what_a_website_review_can_check: "A donor privacy statement on the donate page and in the privacy policy, and an opt-out for public recognition."
+    what_it_cannot_prove: "How the data is actually stored, shared or sold."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/public-disclosure-and-availability-of-exempt-organizations-returns-and-applications-contributors-identities-not-subject-to-disclosure"
+    plain_language_explanation: "Donors expect that their names, addresses and gift sizes are not shared without permission. A short, plain statement on the donate page builds trust."
+    risk_if_missing: "Loss of donor trust and possible state privacy-law exposure."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: privacy-policy
+    topic: "Website privacy policy"
+    requirement_or_expectation: "A site that collects personal information (forms, donations, email signup, analytics) should publish a clear privacy policy describing what is collected, why, who gets it and how to contact the organization. Some states require a policy by statute; the FTC enforces against deceptive privacy claims."
+    level: state-varies
+    applies_when: "Any site collecting personal data."
+    what_a_website_review_can_check: "Presence of a footer link to a privacy policy, a last-updated date, contact method, and a list of third-party tools actually loaded on the site."
+    what_it_cannot_prove: "That the policy matches real data practices."
+    authoritative_source_url: "https://www.ftc.gov/business-guidance/privacy-security"
+    plain_language_explanation: "A privacy policy tells visitors what happens to their data. It should match what the site really does."
+    risk_if_missing: "Deceptive-practice exposure, failed vendor reviews, and blocked ad or payment accounts."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business"]}
+
+  - id: children-data-coppa
+    topic: "Children's online data and COPPA (under 13)"
+    requirement_or_expectation: "COPPA requires verifiable parental consent before collecting personal information online from children under 13 if the site or service is directed to children or knowingly collects their data. The FTC amended the COPPA Rule in 2025; check the FTC page for current compliance dates."
+    level: federal
+    applies_when: "Websites, apps or programs for children under 13, or that knowingly collect data from them."
+    what_a_website_review_can_check: "Forms asking for names, photos, emails or phones of young kids; parental consent flows; a children's privacy section; and third-party trackers on kid-focused pages."
+    what_it_cannot_prove: "Back-end consent records or deletion practices."
+    authoritative_source_url: "https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions"
+    plain_language_explanation: "If a nonprofit collects data from kids under 13 online, it needs a parent's verified permission first. The FTC explains the rules in plain FAQs."
+    risk_if_missing: "FTC enforcement, civil penalties and reputational damage."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.ftc.gov/business-guidance/privacy-security/childrens-privacy", "https://www.ftc.gov/business-guidance/resources/childrens-online-privacy-protection-rule-six-step-compliance-plan-your-business"]}
+
+  - id: teen-data-best-practice
+    topic: "Teen (13 to 17) data best practice"
+    requirement_or_expectation: "COPPA does not cover teens, but youth-serving organizations should limit collected data, avoid public posting of full names and locations, get parent or guardian consent for photos and programs, and check state laws, which vary."
+    level: best-practice
+    applies_when: "Programs serving or showcasing ages 13 to 17."
+    what_a_website_review_can_check: "Whether youth stories and photos use first names only, whether forms collect only what is needed, and whether guardian consent is mentioned."
+    what_it_cannot_prove: "Actual consent records or internal access controls."
+    authoritative_source_url: "https://www.ftc.gov/business-guidance/privacy-security/childrens-privacy"
+    plain_language_explanation: "Teens are not covered by the federal under-13 rule, but they can still be harmed by oversharing. A cautious default is to collect less and publish less."
+    risk_if_missing: "Safety incidents, parent complaints and state-law exposure."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: email-consent-can-spam
+    topic: "Email: CAN-SPAM and consent"
+    requirement_or_expectation: "CAN-SPAM sets rules for commercial email: accurate headers, a clear sender, a physical postal address, and a working opt-out honoured promptly. The FTC says the Act does not require prior consent for commercial email. Whether a fundraising email is 'commercial' depends on its primary purpose, so nonprofits commonly follow the rules anyway."
+    level: federal
+    applies_when: "Email marketing and newsletters; applies most clearly to commercial messages."
+    what_a_website_review_can_check: "Signup forms with clear purpose, unsubscribe link and postal address in sample emails, and a stated frequency."
+    what_it_cannot_prove: "That opt-outs are honoured within the required time."
+    authoritative_source_url: "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"
+    plain_language_explanation: "Every marketing email needs a real sender, a mailing address and an easy way to stop receiving it. Even when a rule may not strictly apply to a nonprofit message, following it is the safer choice."
+    risk_if_missing: "FTC penalties per email, spam-filter blocks and complaints."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: sms-consent-tcpa
+    topic: "SMS and calls: TCPA consent"
+    requirement_or_expectation: "The TCPA restricts autodialed or prerecorded calls and texts without the recipient's prior express consent. For marketing texts the FCC describes prior written consent, which can be obtained electronically through a website form."
+    level: federal
+    applies_when: "Sending text messages or robocalls to supporters."
+    what_a_website_review_can_check: "Text signup forms with consent language, STOP instructions, message frequency and rates disclosures, and a separate consent checkbox."
+    what_it_cannot_prove: "Consent records or carrier registration status."
+    authoritative_source_url: "https://www.fcc.gov/consumers/guides/stop-unwanted-robocalls-and-texts"
+    plain_language_explanation: "Texting supporters requires their clear permission first, and they must be able to stop messages easily. Statutory damages for violations can add up quickly."
+    risk_if_missing: "Class-action exposure, carrier blocking and FCC enforcement."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://docs.fcc.gov/public/attachments/FCC-24-24A1.pdf"]}
+
+  - id: cookies-analytics-tracking
+    topic: "Cookies, analytics and tracking tools"
+    requirement_or_expectation: "There is no single US federal cookie-consent law, but disclosures must be accurate and some states require notices and opt-outs for sharing or selling personal data. Tools such as ad pixels and session replay raise the risk, especially on donation and youth pages."
+    level: state-varies
+    applies_when: "Sites using analytics, ad pixels, embeds or marketing tags."
+    what_a_website_review_can_check: "List the third-party scripts and cookies loaded, whether a notice or preference tool exists, and whether pixels fire on donate and kids pages."
+    what_it_cannot_prove: "Applicability of each state law (some have size or data-volume thresholds) or what vendors do with data."
+    authoritative_source_url: "https://www.ftc.gov/business-guidance/privacy-security"
+    plain_language_explanation: "Tracking tools collect data about visitors, so the privacy policy should name them. Some states give visitors a right to opt out of sharing."
+    risk_if_missing: "State privacy enforcement, misleading-statement claims and lost donor trust."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: accessibility-ada-wcag
+    topic: "Website accessibility (ADA and WCAG 2.2 AA)"
+    requirement_or_expectation: "The ADA applies to nonprofits that operate places of public accommodation, and DOJ guidance says web content should be accessible. The DOJ Title II web rule sets WCAG 2.1 AA for state and local governments. WCAG 2.2 is the current W3C Recommendation (published October 2023), and aiming for WCAG 2.2 AA is the common benchmark."
+    level: federal
+    applies_when: "All public websites; legally clearest for public-accommodation entities and government."
+    what_a_website_review_can_check: "Automated checks plus manual spot checks: alt text, headings, contrast, keyboard operation, focus visibility, form labels, captions, an accessibility statement and contact route."
+    what_it_cannot_prove: "Full conformance. Automated tools find only a portion of issues."
+    authoritative_source_url: "https://www.ada.gov/resources/web-guidance/"
+    plain_language_explanation: "People who use screen readers, keyboards or captions must be able to use the site and donate. WCAG is the technical yardstick, and WCAG 2.2 AA is the standard most reviewers use."
+    risk_if_missing: "Demand letters and lawsuits, excluded users and lost donations."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.w3.org/TR/WCAG22/", "https://www.ada.gov/resources/2024-03-08-web-rule/", "https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/"]}
+
+  - id: section-508-federal-funding
+    topic: "Section 508 and federally funded work"
+    requirement_or_expectation: "Section 508 requires federal agencies to make their ICT accessible. Nonprofits are not directly bound as agencies, but federal grants, contracts and subawards may impose accessibility requirements through the award terms, so check each agreement."
+    level: funder-expectation
+    applies_when: "Federal grants, contracts or deliverables for federal agencies."
+    what_a_website_review_can_check: "Whether public documents and portals produced under federal awards are accessible (tagged PDFs, captions)."
+    what_it_cannot_prove: "The contract obligations themselves."
+    authoritative_source_url: "https://www.section508.gov/manage/laws-and-policies/"
+    plain_language_explanation: "If federal money funds your digital products, the funder may require them to be accessible. Read the award terms for specifics."
+    risk_if_missing: "Award non-compliance findings and corrective action."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: public-inspection-form-990
+    topic: "Public inspection of Form 990 and exemption application"
+    requirement_or_expectation: "A tax-exempt organization must make its exemption application and its last three years of annual returns available for public inspection. The IRS public disclosure overview and documents pages explain what to provide and how requests are handled. Contributor identities are generally not disclosed."
+    level: federal
+    applies_when: "501(c)(3) and other exempt organizations."
+    what_a_website_review_can_check: "Whether the site links to Form 990s and the determination letter or says how to request them."
+    what_it_cannot_prove: "That requests are fulfilled on time or that all required documents are complete."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/public-disclosure-and-availability-of-exempt-organization-returns-and-applications-public-disclosure-overview"
+    plain_language_explanation: "Anyone can ask to see the organization's recent 990s and its application for exemption. Posting them on the website makes this easy."
+    risk_if_missing: "IRS penalties per day for failing to provide copies, and reduced trust."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/charities-non-profits/public-disclosure-and-availability-of-exempt-organizations-returns-and-applications-documents-subject-to-public-disclosure"]}
+
+  - id: conflict-of-interest-policy
+    topic: "Conflict-of-interest policy"
+    requirement_or_expectation: "Form 990, Part VI asks whether the organization has a written conflict-of-interest policy and how it is monitored. The IRS treats these as governance practices rather than legal mandates, though some states require them."
+    level: funder-expectation
+    applies_when: "Organizations filing Form 990 or applying for grants."
+    what_a_website_review_can_check: "Whether a policy or board governance page is published; Form 990 Part VI answers are visible on filed returns."
+    what_it_cannot_prove: "That the policy is adopted by the board, signed annually or followed."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-governance-form-990-part-vi"
+    plain_language_explanation: "A written policy shows how the board handles situations where someone could benefit personally. The 990 asks about it and funders often request a copy."
+    risk_if_missing: "Weak governance findings, funder concern and private-benefit risk."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/pub/irs-tege/governance_practices.pdf"]}
+
+  - id: whistleblower-policy
+    topic: "Whistleblower policy"
+    requirement_or_expectation: "Form 990 Part VI asks whether the organization has a written whistleblower policy. Federal law (Sarbanes-Oxley) also makes retaliation against whistleblowers in connection with federal matters a crime for all organizations, and some states mandate policies."
+    level: funder-expectation
+    applies_when: "Organizations filing Form 990 and those with employees."
+    what_a_website_review_can_check: "A published policy or a governance statement; the 990 Part VI answer."
+    what_it_cannot_prove: "Whether reports are handled properly."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-governance-form-990-part-vi"
+    plain_language_explanation: "A whistleblower policy tells staff and volunteers how to report concerns without retaliation. The IRS asks about it on the Form 990."
+    risk_if_missing: "Unreported problems, retaliation claims and funder concerns."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: document-retention-policy
+    topic: "Document retention and destruction policy"
+    requirement_or_expectation: "Form 990 Part VI asks whether the organization has a written document retention and destruction policy. The policy should cover legal holds if litigation or investigation is expected."
+    level: funder-expectation
+    applies_when: "Organizations filing Form 990."
+    what_a_website_review_can_check: "Whether the policy is mentioned in governance materials; Form 990 Part VI answer."
+    what_it_cannot_prove: "Whether the policy is followed."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-governance-form-990-part-vi"
+    plain_language_explanation: "A retention policy sets how long records are kept and when they are safely destroyed. It also stops routine deletion when a legal matter arises."
+    risk_if_missing: "Lost records during audits and obstruction concerns if documents are destroyed during an inquiry."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: board-minimums
+    topic: "Board size and independence minimums"
+    requirement_or_expectation: "State nonprofit corporation law sets minimum director numbers and rules about selection and vacancies. Washington's nonprofit act (chapter 24.03A RCW) addresses the number of directors in section 24.03A.505. Funders and evaluators often expect at least three directors, including some who are unrelated and unpaid."
+    level: state-varies
+    applies_when: "Incorporated nonprofits."
+    what_a_website_review_can_check: "A public board list with names and roles, and whether the count and independence look reasonable."
+    what_it_cannot_prove: "Bylaws compliance, voting records or conflicts."
+    authoritative_source_url: "https://app.leg.wa.gov/RCW/default.aspx?cite=24.03A"
+    plain_language_explanation: "Each state decides the minimum number of directors. A small, family-only board can raise governance and private-benefit questions even if it is legal."
+    risk_if_missing: "Invalid board actions, weak oversight and funder concerns."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: lobbying-political-limits
+    topic: "Lobbying and political activity limits for 501(c)(3)"
+    requirement_or_expectation: "A 501(c)(3) is absolutely prohibited from political campaign intervention (supporting or opposing candidates). Lobbying is allowed in limited amounts, measured by either the substantial part test or the 501(h) expenditure test. Election years need extra caution with website content, social media and issue advocacy."
+    level: federal
+    applies_when: "All 501(c)(3) organizations."
+    what_a_website_review_can_check: "Candidate endorsements, rating or voter guides with bias, links to candidate sites and partisan social posts, and whether leaders' personal political statements are separated from organizational voice."
+    what_it_cannot_prove: "Lobbying spend or whether a 501(h) election was filed."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/charitable-organizations/restriction-of-political-campaign-intervention-by-section-501c3-tax-exempt-organizations"
+    plain_language_explanation: "A charity can never take sides in an election. It may lobby only within limits set by the IRS."
+    risk_if_missing: "Excise taxes and possible loss of exempt status."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.irs.gov/pub/irs-news/fs-06-17.pdf", "https://www.irs.gov/charities-non-profits/measuring-lobbying-activity-expenditure-test", "https://www.irs.gov/charities-non-profits/measuring-lobbying-substantial-part-test"]}
+
+  - id: youth-safeguarding-basics
+    topic: "Youth-serving safeguarding basics"
+    requirement_or_expectation: "Organizations working with minors should have written child-protection policies: screening, two-adult rules, supervision ratios, incident reporting, training and a code of conduct. Requirements vary by state and by licensing or funding source."
+    level: best-practice
+    applies_when: "Programs serving minors."
+    what_a_website_review_can_check: "Whether a child safety or safeguarding policy page exists and a contact for concerns is published."
+    what_it_cannot_prove: "Whether staff are trained or checks are done."
+    authoritative_source_url: "https://dcyf.wa.gov/safety/mandated-reporter"
+    plain_language_explanation: "Programs for kids need written safety rules and people trained to follow them. Publishing a short policy shows families what to expect."
+    risk_if_missing: "Child safety incidents, liability, loss of insurance and funding."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", note: "Washington's DCYF mandated reporter page is used as the state example; no single federal safeguarding page is cited."}
+
+  - id: mandated-reporter-notes
+    topic: "Mandated-reporter obligations"
+    requirement_or_expectation: "States designate which professionals and staff must report suspected child abuse or neglect. Washington's RCW 26.44.030 lists mandated reporters, and DCYF explains who must report and how. Many organizations adopt a policy requiring all staff and volunteers to report regardless of legal category."
+    level: state-varies
+    applies_when: "Any organization serving children; who is mandated depends on the state and role."
+    what_a_website_review_can_check: "A published reporting statement or contact route."
+    what_it_cannot_prove: "Whether staff know the process."
+    authoritative_source_url: "https://app.leg.wa.gov/rcw/default.aspx?cite=26.44.030"
+    plain_language_explanation: "Some people must report suspected child abuse by law, and the list differs by state. A simple internal rule that everyone reports is a safe approach."
+    risk_if_missing: "Legal penalties for failing to report and harm to children."
+    needs_human_legal_review: true
+    verification: {method: fetched-200, checked: "2026-10-10", related: ["https://dcyf.wa.gov/safety/mandated-reporter", "https://dcyf.wa.gov/safety/report-abuse"]}
+
+  - id: background-checks-youth
+    topic: "Background checks for staff and volunteers working with youth"
+    requirement_or_expectation: "Many states require or allow criminal background checks for people with access to children. In Washington, RCW 43.43.830 and 43.43.832 address background checks for access to children or vulnerable persons and how information is disclosed. Requirements differ by role, licensing and funding."
+    level: state-varies
+    applies_when: "Staff and volunteers with unsupervised access to minors."
+    what_a_website_review_can_check: "Whether the website states that staff and volunteers are screened."
+    what_it_cannot_prove: "Whether checks are actually completed or recurring."
+    authoritative_source_url: "https://app.leg.wa.gov/rcw/default.aspx?cite=43.43.832"
+    plain_language_explanation: "People who work alone with children should be screened. The legal steps depend on the state and the type of program."
+    risk_if_missing: "Child safety risk, insurer or funder objections and legal liability."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://app.leg.wa.gov/rcw/default.aspx?cite=43.43.830"]}
+
+  - id: photo-media-consent
+    topic: "Photo and media consent"
+    requirement_or_expectation: "Get written consent before publishing identifiable photos, video or stories of people, and a parent or guardian's consent for minors. Some states have right-of-publicity statutes; Washington's RCW 63.60.010 recognises a property right in name, voice, signature, photograph and likeness."
+    level: state-varies
+    applies_when: "Using images or testimonials of clients, participants or youth."
+    what_a_website_review_can_check: "Whether people in photos are identified, whether youth are named or geotagged, and whether a media-consent statement exists."
+    what_it_cannot_prove: "That signed releases are on file."
+    authoritative_source_url: "https://app.leg.wa.gov/rcw/default.aspx?cite=63.60.010"
+    plain_language_explanation: "Use a person's picture only with their written permission, and a parent's permission for kids. Keep the signed form."
+    risk_if_missing: "Privacy and publicity claims, safety risks for vulnerable youth."
+    needs_human_legal_review: true
+    verification: {method: fetched-200, checked: "2026-10-10"}
+
+  - id: youth-employment-federal-flsa
+    topic: "Youth employment: federal FLSA"
+    requirement_or_expectation: "The Fair Labor Standards Act sets minimum ages and limits hours and hazardous work for minors. Children under 14 generally may not be employed in non-agricultural jobs covered by the FLSA. For 14 and 15 year olds there are limits such as no more than 3 hours on a school day and 18 hours in a school week. Where state law is stricter, the state rule applies."
+    level: federal
+    applies_when: "Paid work by minors, including youth employment or internship programs."
+    what_a_website_review_can_check: "Job postings for youth roles for age ranges, hours and task descriptions."
+    what_it_cannot_prove: "Actual schedules, pay or permits. Intern or student status does not automatically exempt a role from minimum wage."
+    authoritative_source_url: "https://www.dol.gov/agencies/whd/youthrules"
+    plain_language_explanation: "Federal law limits when and how long young teens can work and what jobs they may do. If the state's rules are tighter, follow those."
+    risk_if_missing: "Back wages, child labor penalties and harm to young workers."
+    needs_human_legal_review: true
+    verification: {method: fetched-200, checked: "2026-10-10", note: "youthrules.dol.gov redirects to dol.gov/agencies/whd/youthrules.", related: ["https://www.dol.gov/agencies/whd/fact-sheets/43-child-labor-non-agriculture", "https://www.dol.gov/agencies/whd/youthrules/young-workers/non-ag-14-15"]}
+
+  - id: youth-employment-washington-lni
+    topic: "Youth employment: Washington L&I example"
+    requirement_or_expectation: "Washington L&I says employers hiring minors need a minor work permit endorsement on the business license, a parent or school authorization form, and age verification. L&I also publishes hour limits for 14 to 17 year olds."
+    level: state-varies
+    applies_when: "Employing minors in Washington."
+    what_a_website_review_can_check: "Youth job postings stating age eligibility and hours; whether a permit or parent authorization is mentioned."
+    what_it_cannot_prove: "Whether the endorsement is held or forms are kept."
+    authoritative_source_url: "https://www.lni.wa.gov/workers-rights/youth-employment/how-to-hire-minors"
+    plain_language_explanation: "In Washington, an employer must register to hire minors and get a parent or school authorization. Hours depend on age and whether school is in session."
+    risk_if_missing: "L&I penalties and unsafe or unlawful schedules."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.lni.wa.gov/workers-rights/youth-employment/hours-of-work", "https://www.lni.wa.gov/forms-publications/F700-002-000.pdf"]}
+
+  - id: trademark-domain-ownership
+    topic: "Trademark and domain ownership"
+    requirement_or_expectation: "Register the domain in the organization's name with a shared, role-based admin email and at least two administrators, not in a founder's or contractor's personal account. Consider federal trademark registration for the name and logo; the USPTO explains the basics and recommends a clearance search first."
+    level: best-practice
+    applies_when: "Always for domains; trademark when the brand has value or risk of copying."
+    what_a_website_review_can_check: "WHOIS or RDAP registrant organization where visible, DNS registrar, expiry date, and whether the name or logo is marked or registered in the USPTO database."
+    what_it_cannot_prove: "Who holds the registrar login or whether common-law rights exist."
+    authoritative_source_url: "https://www.uspto.gov/trademarks/basics"
+    plain_language_explanation: "The organization, not an individual, should own its domain and brand. This avoids losing the website when a volunteer or vendor leaves."
+    risk_if_missing: "Loss of domain or brand, takeover disputes and lapsed renewals."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", note: "No authoritative domain-registration source was verified; USPTO covers the trademark half only."}
+
+  - id: insurance-basics
+    topic: "Insurance basics"
+    requirement_or_expectation: "Common coverage includes general liability, directors and officers (D&O), and workers' compensation where there are employees. The National Council of Nonprofits notes that nonprofits will need workers' compensation and should seriously consider D&O. Programs for youth often also need abuse and molestation coverage and event or auto coverage. Workers' compensation rules and insurers differ by state (some states use state funds, as Washington does through L&I)."
+    level: best-practice
+    applies_when: "Organizations with staff, board members, events or programs."
+    what_a_website_review_can_check: "Whether the site mentions insurance for events or youth programs. Usually not visible."
+    what_it_cannot_prove: "Whether policies exist, their limits, or what they exclude."
+    authoritative_source_url: "https://www.councilofnonprofits.org/running-nonprofit/employment-hr/managing-nonprofit-employees"
+    plain_language_explanation: "Insurance protects the organization, its board and its participants when something goes wrong. Which policies are needed depends on staff, programs and state law."
+    risk_if_missing: "An uninsured claim can end the organization; some coverage is legally required."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.councilofnonprofits.org/running-nonprofit/governance-leadership/board-roles-and-responsibilities"]}
+
+  - id: record-keeping
+    topic: "Record keeping"
+    requirement_or_expectation: "An exempt organization must keep books and records that show compliance with the tax rules, supporting income, expenses and activities. Employment and tax records also have separate retention periods."
+    level: federal
+    applies_when: "All exempt organizations."
+    what_a_website_review_can_check: "Little; look for financial reports and policy pages that suggest records exist."
+    what_it_cannot_prove: "Actual books, receipts, minutes and retention practice."
+    authoritative_source_url: "https://www.irs.gov/charities-non-profits/eo-operational-requirements-recordkeeping-requirements-for-exempt-organizations"
+    plain_language_explanation: "The IRS expects the nonprofit to keep proof of income, spending and activities. Without records it cannot defend its exempt status or its 990."
+    risk_if_missing: "Failed audits, inability to substantiate grants and penalties."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
+
+  - id: grant-agreement-restrictions
+    topic: "Grant agreement restrictions and reporting"
+    requirement_or_expectation: "Grant terms may restrict use of funds, require reports, audits, matching, publicity credit, record retention and return of unspent money. Federal awards follow the Uniform Guidance in 2 CFR Part 200."
+    level: funder-expectation
+    applies_when: "Any restricted grant or government award."
+    what_a_website_review_can_check: "Whether funders are acknowledged as required and whether public claims about funded programs match the grant description."
+    what_it_cannot_prove: "Actual fund use, reporting dates or compliance with restrictions."
+    authoritative_source_url: "https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200"
+    plain_language_explanation: "A grant agreement is a contract: the money must be used as promised and reported on time. Federal awards add standard government rules."
+    risk_if_missing: "Clawbacks, ineligibility for future awards and legal claims."
+    needs_human_legal_review: true
+    verification: {method: search-indexed, checked: "2026-10-10", related: ["https://www.councilofnonprofits.org/trends-and-policy-issues/omb-uniform-guidance"]}
+
+  - id: financial-transparency-evaluator-standards
+    topic: "Financial transparency expected by charity evaluators"
+    requirement_or_expectation: "BBB Wise Giving Alliance's 20 Standards for Charity Accountability cover governance, finances, results reporting and transparency, and evaluators commonly expect a published annual report or Form 990 and clear program descriptions."
+    level: funder-expectation
+    applies_when: "Publicly soliciting charities seeking evaluator or funder confidence."
+    what_a_website_review_can_check: "An annual report or financial summary, a Form 990 link, board list and leadership names, and clear mission and program descriptions."
+    what_it_cannot_prove: "The accuracy of the financials or the effectiveness of programs."
+    authoritative_source_url: "https://give.org/bbb-standards-for-charity-accountability"
+    plain_language_explanation: "Donors and evaluators look for easy access to who runs the charity and how money is used. Publishing a Form 990 and annual summary meets most of those expectations."
+    risk_if_missing: "Lower trust, missed grants and weaker evaluator profiles."
+    needs_human_legal_review: false
+    verification: {method: search-indexed, checked: "2026-10-10"}
