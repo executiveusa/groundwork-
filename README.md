@@ -1,6 +1,6 @@
 # Groundwork: nonprofit website audit and repair toolkit
 
-An in-house toolkit for auditing and repairing nonprofit and social-purpose websites, checking legal basics and online presence, and preparing organizations to be funder-ready. "Groundwork" is a working name (`src/brand.ts`); run a trademark search before using it publicly.
+An in-house toolkit for auditing and repairing nonprofit and social-purpose websites, checking legal basics and online presence, and preparing organizations to be funder-ready. The name "Groundwork" is set in `src/brand.ts` (one rename point); run a trademark search before using it publicly.
 
 It is **not a cookie-cutter checklist runner**. Deterministic code gathers evidence; an LLM (Claude) reasons about each organization against a 107-item knowledge base and writes findings that cite that evidence. A human reviews before anything is sent.
 
