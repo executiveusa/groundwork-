@@ -170,7 +170,7 @@ export const presenceEntrySchema = z.object({
   id: z.string(),
   name: z.string(),
   category: z.string(),
-  url: z.string(),
+  url: z.string().nullable(),
   what_it_proves_or_gives: z.string().optional(),
   who_it_applies_to: z.union([z.string(), z.array(z.string())]).optional(),
   cost: z.string().optional(),
