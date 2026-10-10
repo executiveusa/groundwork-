@@ -1,0 +1,1803 @@
+version: 0.1.0
+items:
+  - id: mission.one-sentence
+    category: mission
+    title: One-sentence mission above the fold
+    check: Home page states who you serve, what you do and where, in one sentence a stranger understands within 5 seconds.
+    method:
+      - crawl
+      - browser
+    why: Funders and donors decide in seconds whether you are for them.
+    severity: P1
+    effort: S
+    impact:
+      - TRUST
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Rewrite the hero line as 'We [do what] for [whom] in [where]'. Test it on someone outside the sector.
+    nwkPrecedent: NWK hero rewritten to state the 16-19 cohort and the location instead of abstract mission language.
+  - id: mission.audience-clear
+    category: mission
+    title: Primary audience and next step are explicit
+    check: One primary audience per page and one clear next action; secondary audiences are routed, not mixed in.
+    method:
+      - browser
+      - manual
+    why: Pages that talk to everyone convert no one.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Choose the primary visitor for the home page; give each other audience (donor, partner, referrer) a labeled path.
+    nwkPrecedent: NWK home page got a single next step for 12 local youth aged 16-19.
+  - id: mission.no-jargon
+    category: mission
+    title: Plain language, no unexplained jargon
+    check: No unexplained acronyms, sector jargon or inflated claims in headings and first paragraphs.
+    method:
+      - crawl
+      - manual
+    why: Jargon reads as vagueness and slows non-specialist funders.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Replace jargon with concrete verbs; spell out acronyms on first use.
+  - id: mission.consistent-everywhere
+    category: mission
+    title: Mission statement matches across site, IRS record and profiles
+    check: Compare site, Form 990/determination wording, Candid/Charity Navigator and social bios.
+    method:
+      - crawl
+      - record
+      - search
+    why: Mismatched descriptions are the most common trust signal funders notice.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Pick one canonical mission sentence and update every profile to match.
+  - id: toc.problem-to-change
+    category: theory_of_change
+    title: Problem, approach and intended change are connected
+    check: The site explains the problem, why this approach, and what changes for participants (short-term and long-term).
+    method:
+      - crawl
+      - manual
+    why: A funder funds a believable cause-and-effect chain, not a list of activities.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a half-page 'How change happens' with inputs, activities, outcomes and what you do not claim.
+  - id: toc.honest-scope
+    category: theory_of_change
+    title: Claims stay within what you can prove
+    check: No outcomes, counts or 'transforming lives' claims without a source or a stated measurement method.
+    method:
+      - crawl
+      - manual
+    why: Unsupported claims are a due-diligence red flag and a legal risk in solicitations.
+    severity: P0
+    effort: S
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Mark every number with source and date, or remove it. Describe the plan honestly if there are no results yet.
+    nwkPrecedent: NWK removed unverifiable outcome claims and labeled the program as a first cohort.
+  - id: prog.what-where-who
+    category: programs
+    title: Each program says what, where, who and how to join
+    check: Every program page has eligibility, location, schedule/dates, cost to participants and a way to apply or contact.
+    method:
+      - crawl
+    why: Visitors leave when they cannot tell if a program is for them.
+    severity: P1
+    effort: M
+    impact:
+      - CONVERSION
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: "Use one template: What / Who it is for / Where & when / Cost / How to apply / What happens next."
+    nwkPrecedent: NWK program pages standardized with eligibility and an intake form.
+  - id: prog.capacity-honest
+    category: programs
+    title: Capacity and timing are stated honestly
+    check: Cohort size, start dates and waitlists are shown, and 'coming soon' items are labeled.
+    method:
+      - crawl
+      - manual
+    why: Overpromising capacity damages trust with families and funders.
+    severity: P2
+    effort: XS
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: State seats and timing; label anything not yet running.
+    nwkPrecedent: NWK stated a first cohort of 12 and a coming-soon mode for unfinished areas.
+  - id: prog.stale-content
+    category: programs
+    title: No stale dates, past events or dead program pages
+    check: Search for years/dates older than 12 months on current pages, expired events, 'upcoming' items in the past.
+    method:
+      - crawl
+    why: Stale content signals an inactive organization.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Archive or update; add a 'last updated' habit to the monthly care list.
+  - id: evid.outcomes-sourced
+    category: evidence_impact
+    title: Outcomes have source, date and method
+    check: Impact numbers cite year, denominator and how measured; baseline vs. result where possible.
+    method:
+      - crawl
+      - manual
+    why: Funders ask for evidence logic in every application.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: "Build an evidence page: metric, value, period, method, source."
+  - id: evid.stories-consent
+    category: evidence_impact
+    title: Stories and photos have documented consent
+    check: Named people, minors and testimonials have written consent; minors are not identifiable without guardian consent.
+    method:
+      - manual
+      - legal_review
+    why: Using stories without consent is an ethical and legal exposure.
+    severity: P0
+    effort: S
+    impact:
+      - SAFETY
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - vulnerable_population
+    fix: Adopt a media-consent form and keep a log; remove anything undocumented.
+    nwkPrecedent: NWK avoided identifiable minors and removed named people lacking written OK.
+  - id: evid.no-fake-proof
+    category: evidence_impact
+    title: No fake logos, testimonials or stock presented as real
+    check: Partner logos, testimonials and photos are real and permitted; stock imagery is not passed off as participants.
+    method:
+      - crawl
+      - browser
+      - manual
+    why: Fabricated proof is the fastest way to lose credibility and can be deceptive-practice risk.
+    severity: P0
+    effort: XS
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Remove anything you cannot document; label stock photos honestly.
+    nwkPrecedent: NWK removed an unconfirmed named endorsement until written permission.
+  - id: cred.legal-name
+    category: credibility
+    title: Legal name, EIN and status visible
+    check: Footer/about shows exact legal name, EIN, 501(c)(3) status or fiscal-sponsor relationship.
+    method:
+      - crawl
+      - record
+    why: Funders and donors verify these first; donors need it for tax receipts.
+    severity: P0
+    effort: XS
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: "Add a footer line: '[Legal name] is a 501(c)(3) (EIN xx-xxxxxxx). Contributions are tax-deductible to the extent allowed by law.' Use the sponsor wording if fiscally sponsored (see cred.sponsor-wording)."
+    nwkPrecedent: NWK footer clarified the HSI sponsorship relationship.
+  - id: cred.sponsor-wording
+    category: credibility
+    title: Fiscal sponsorship described accurately
+    check: If fiscally sponsored, the site names the sponsor, does not claim own 501(c)(3), and donation wording matches the sponsorship agreement.
+    method:
+      - crawl
+      - manual
+      - legal_review
+    why: Misstating tax status is a serious donor-deception risk.
+    severity: P0
+    effort: S
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all:
+        - fiscally_sponsored
+      any: []
+    fix: Use agreed wording; get sponsor written approval; checks gifts are payable to the sponsor.
+    nwkPrecedent: NWK held fundraising wording for HSI written approval before going live.
+  - id: cred.irs-matches-site
+    category: credibility
+    title: IRS record matches site identity
+    check: Name, city, state and EIN on ProPublica/IRS match the site; flag differences.
+    method:
+      - record
+    why: Name mismatches stall grant due diligence and payment processors.
+    severity: P1
+    effort: XS
+    impact:
+      - FUNDING
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Update the site or file the name/address change with the IRS.
+  - id: cred.real-people
+    category: credibility
+    title: Leadership and governance are real and findable
+    check: Named leaders and board with roles, with permission; at least a contact person.
+    method:
+      - crawl
+      - manual
+    why: Anonymous organizations do not get funded.
+    severity: P1
+    effort: S
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Publish leadership and board (with consent), roles and a contact method.
+    nwkPrecedent: NWK flagged a second governor and advisers as open items.
+  - id: cred.contact-reachable
+    category: credibility
+    title: A real contact path works
+    check: Email/phone/form exist, a physical or mailing address is shown (or a stated reason it is not), and a reply is monitored.
+    method:
+      - crawl
+      - manual
+    why: Funders test the contact path.
+    severity: P1
+    effort: XS
+    impact:
+      - TRUST
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a monitored role-based email and a mailing address or PO box.
+  - id: cred.third-party-validation
+    category: credibility
+    title: External validation is linked
+    check: Candid/GuideStar profile, press, partner letters or awards appear with links.
+    method:
+      - crawl
+      - search
+    why: Third-party proof beats self-description.
+    severity: P2
+    effort: M
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Claim the Candid profile and link real mentions.
+  - id: cred.consistent-names
+    category: credibility
+    title: Brand name, legal name and domain are used consistently
+    check: Variants of the name across site, socials, emails and registries are listed and reconciled.
+    method:
+      - crawl
+      - search
+    why: Inconsistency looks careless and splits search results.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: "Write a name policy: legal name, brand name, short name and where each is used."
+  - id: fund.donate-path
+    category: funder_readiness
+    title: A donation path exists and works
+    check: Donate button leads to a working, secure form with a tax-receipt statement; or states how to give.
+    method:
+      - crawl
+      - browser
+    why: Broken or hidden giving costs revenue.
+    severity: P1
+    effort: S
+    impact:
+      - FUNDING
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - takes_donations
+    fix: Put one giving path in the header; test a real transaction.
+  - id: fund.donate-wording
+    category: funder_readiness
+    title: Donation and tax-deductibility wording is accurate
+    check: No 'tax-deductible' claim unless true; sponsor/charity relationship stated; no promises about use of funds you cannot meet.
+    method:
+      - crawl
+      - legal_review
+    why: Misleading solicitation wording triggers state regulators.
+    severity: P0
+    effort: S
+    impact:
+      - FUNDING
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - takes_donations
+    fix: Have the board or counsel approve the exact wording; keep a copy.
+    nwkPrecedent: NWK held donate wording behind approval and a coming-soon mode.
+  - id: fund.funder-page
+    category: funder_readiness
+    title: A 'for funders' summary exists
+    check: "One page: problem, program, budget range, outcomes plan, governance, how to contact or fund."
+    method:
+      - crawl
+    why: Program officers skim; give them a single page.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Create /funders with a two-minute story and downloadable one-pager.
+    nwkPrecedent: NWK built a funder-facing facts doc and trust page.
+  - id: fund.budget-visible
+    category: funder_readiness
+    title: Budget and use of funds are transparent
+    check: Annual budget or revenue/expense summary or 990 link; plain-language use-of-funds.
+    method:
+      - crawl
+      - record
+    why: Transparency is a due-diligence checkbox.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - has_staff
+        - takes_donations
+        - targets_federal_grants
+    fix: Publish a simple use-of-funds chart and link the 990s.
+  - id: fund.grant-ready-docs
+    category: funder_readiness
+    title: Core grant documents are ready
+    check: IRS determination letter, W-9, board list, budget, 990/financials, DEI/safeguarding policies, bios, logo pack are on file.
+    method:
+      - manual
+    why: Applications stall for missing paperwork.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+    appliesWhen:
+      all: []
+      any:
+        - targets_federal_grants
+    fix: Assemble a grant-readiness folder and checklist.
+  - id: fund.fed-registrations
+    category: funder_readiness
+    title: Federal registrations in place for federal grants
+    check: UEI and active SAM.gov registration; Grants.gov access; note renewal dates.
+    method:
+      - record
+      - manual
+    why: You cannot receive federal awards without active SAM registration.
+    severity: P1
+    effort: M
+    impact:
+      - FUNDING
+    appliesWhen:
+      all:
+        - targets_federal_grants
+      any: []
+    fix: Start SAM.gov registration early (it can take weeks); calendar the annual renewal.
+  - id: fund.found-via-search
+    category: funder_readiness
+    title: Funder-search visibility
+    check: Searching the name plus 'nonprofit' returns registry or profile pages, not just the site.
+    method:
+      - search
+    why: Funders often validate through Candid and ProPublica first.
+    severity: P2
+    effort: S
+    impact:
+      - SEARCH
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Claim and complete the listings from the presence directory.
+  - id: fund.funder-fit
+    category: funder_readiness
+    title: Target funders are named and fit-checked
+    check: Known target funders' priorities, geography and size match the organization.
+    method:
+      - manual
+    why: Applying to poor-fit funders wastes limited capacity.
+    severity: P2
+    effort: M
+    impact:
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: List 10 fit-checked funders; use public databases and the Grants.gov search.
+  - id: gov.board-listed
+    category: transparency_governance
+    title: Board or governing body is disclosed
+    check: Board names/roles on the site or a clear reason; conflict-of-interest policy exists.
+    method:
+      - crawl
+      - manual
+    why: Governance is a core diligence area.
+    severity: P1
+    effort: S
+    impact:
+      - TRUST
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Publish the board list and adopt a conflict-of-interest policy.
+  - id: gov.annual-report
+    category: transparency_governance
+    title: Annual report or impact summary is published
+    check: A dated report or letter, even one page, is findable.
+    method:
+      - crawl
+    why: Shows continuity and accountability.
+    severity: P2
+    effort: M
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - has_staff
+        - takes_donations
+    fix: Publish a one-page annual summary.
+  - id: gov.990-link
+    category: transparency_governance
+    title: Form 990 is linked or discoverable
+    check: 990s available on the site or via ProPublica/Candid link.
+    method:
+      - crawl
+      - record
+    why: Federal law requires making certain returns available; linking reduces requests.
+    severity: P2
+    effort: XS
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - has_staff
+        - takes_donations
+    fix: Link ProPublica or host PDFs.
+  - id: gov.policies-exist
+    category: transparency_governance
+    title: Core policies exist
+    check: Conflict of interest, whistleblower, document retention, gift acceptance as applicable to size.
+    method:
+      - manual
+      - legal_review
+    why: Policies are asked about on Form 990 and in diligence.
+    severity: P2
+    effort: M
+    impact:
+      - TRUST
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any:
+        - has_staff
+    fix: Adopt templates reviewed by counsel; record board approval.
+  - id: gov.state-registration
+    category: transparency_governance
+    title: State charity registration and annual filings are current
+    check: State charity registry shows registered and good standing where soliciting; secretary-of-state status active.
+    method:
+      - search
+      - record
+      - legal_review
+    why: Soliciting without required registration can bring penalties.
+    severity: P0
+    effort: M
+    impact:
+      - FUNDING
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - takes_donations
+    fix: Check the state charity office and registered-agent status; mark LEGAL REVIEW REQUIRED where unsure.
+  - id: legal.privacy-policy
+    category: legal_disclosure
+    title: Privacy policy exists and matches reality
+    check: Policy found from every page footer; names data collected, vendors, retention, rights, contact; matches the forms.
+    method:
+      - crawl
+      - legal_review
+    why: Required by many laws and by processors and ad platforms.
+    severity: P0
+    effort: M
+    impact:
+      - SAFETY
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Rewrite in plain language; list real vendors; add a contact for requests.
+    nwkPrecedent: NWK privacy page rewritten using NTEN structure.
+  - id: legal.terms
+    category: legal_disclosure
+    title: Terms of use exist where needed
+    check: Terms for site, forms and any user submissions.
+    method:
+      - crawl
+      - legal_review
+    why: Sets rules and limits liability.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add concise terms; link in footer.
+  - id: legal.cookie-consent
+    category: legal_disclosure
+    title: Cookie/tracker disclosure matches practice
+    check: Trackers (analytics, pixels, embeds) are listed; consent where required (EU/CA visitors, some states).
+    method:
+      - technical
+      - legal_review
+    why: Undisclosed trackers are a frequent complaint basis.
+    severity: P1
+    effort: S
+    impact:
+      - SAFETY
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Inventory scripts; remove unneeded ones; add notice or consent where required.
+  - id: legal.accessibility-statement
+    category: legal_disclosure
+    title: Accessibility statement and feedback route
+    check: Statement of standard targeted, known gaps and a contact.
+    method:
+      - crawl
+    why: Shows good faith and lowers risk.
+    severity: P2
+    effort: XS
+    impact:
+      - ACCESSIBILITY
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Publish a short statement with a contact email.
+  - id: legal.donor-privacy
+    category: legal_disclosure
+    title: Donor privacy policy
+    check: States whether donor lists are shared or sold.
+    method:
+      - crawl
+      - legal_review
+    why: Donors ask; many platforms require it.
+    severity: P1
+    effort: XS
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - takes_donations
+    fix: State plainly that donor info is not sold or shared except processors.
+  - id: legal.copyright-licenses
+    category: legal_disclosure
+    title: Images, fonts and music are licensed
+    check: Licenses for stock, fonts, music, third-party code are documented.
+    method:
+      - manual
+    why: Takedown and demand letters are common and avoidable.
+    severity: P2
+    effort: S
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Keep an asset license log; replace anything unlicensed.
+  - id: legal.coppa
+    category: legal_disclosure
+    title: Children's data handling (COPPA) considered
+    check: Forms and analytics avoid collecting personal information from under-13s without verifiable parental consent.
+    method:
+      - manual
+      - legal_review
+    why: COPPA applies to online services directed at children.
+    severity: P0
+    effort: M
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+    fix: Do not collect under-13 data; use guardian-completed forms.
+    nwkPrecedent: NWK intake targeted ages 16-19 and used guardian paths; counsel review pending.
+  - id: legal.sms-email-consent
+    category: legal_disclosure
+    title: Email and SMS consent and unsubscribe
+    check: Opt-in language, unsubscribe in every email, SMS terms and STOP handling.
+    method:
+      - crawl
+      - legal_review
+    why: CAN-SPAM and TCPA carry real penalties.
+    severity: P1
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - uses_sms_or_email_marketing
+    fix: Add consent checkbox text, unsubscribe and SMS terms.
+  - id: legal.employment-claims
+    category: legal_disclosure
+    title: Employer and jobs claims are legal and accurate
+    check: Job placement or wage statements, youth employment rules (child-labor limits) are accurate for the state.
+    method:
+      - manual
+      - legal_review
+    why: Employing minors has hour and task limits; misstatements create liability.
+    severity: P0
+    effort: M
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+    fix: Have counsel check youth-employment statements; add compliance notes.
+    nwkPrecedent: NWK closed a child-labor bypass in the database and kept employer wording gated for HSI approval.
+  - id: legal.fundraising-events
+    category: legal_disclosure
+    title: Raffles, auctions and events comply
+    check: Raffles/games of chance and event solicitations follow state rules.
+    method:
+      - manual
+      - legal_review
+    why: State rules on raffles are strict and vary.
+    severity: P1
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - has_events
+        - takes_donations
+    fix: Check state rules before advertising.
+  - id: legal.international
+    category: legal_disclosure
+    title: Cross-border and sanctions considerations
+    check: International transfers, GDPR for EU visitors, sanctions screening.
+    method:
+      - manual
+      - legal_review
+    why: International work adds regulatory duties.
+    severity: P1
+    effort: M
+    impact:
+      - SAFETY
+    appliesWhen:
+      all:
+        - international_work
+      any: []
+    fix: Get specialist advice; document the controls.
+  - id: priv.forms-minimal
+    category: privacy_data
+    title: Forms collect only what is needed
+    check: Each field has a purpose; sensitive fields (DOB, address, health) are justified.
+    method:
+      - crawl
+      - manual
+    why: Less data means less risk.
+    severity: P1
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Remove unnecessary fields; split sensitive data to a later step.
+    nwkPrecedent: NWK trimmed intake fields and added saved-draft clearing.
+  - id: privacy.forms
+    category: privacy_data
+    title: Forms are secure and disclose use
+    check: Forms submit over HTTPS via POST, link the privacy policy and state who sees the data.
+    method:
+      - crawl
+      - technical
+    why: Plain-text or GET submission leaks data.
+    severity: P0
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Fix method and add disclosure text next to the submit button.
+    nwkPrecedent: NWK added privacy text and server-side validation to forms.
+  - id: priv.spam-abuse
+    category: privacy_data
+    title: Forms resist spam and abuse
+    check: Rate limiting, honeypot or CAPTCHA, server validation.
+    method:
+      - technical
+      - manual
+    why: Spam floods ruin follow-up and expose data.
+    severity: P2
+    effort: S
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Add throttling and validation on the server.
+    nwkPrecedent: NWK added rate limits and form throttles.
+  - id: priv.data-stored-safely
+    category: privacy_data
+    title: Submissions are stored with access control
+    check: Database not public; row-level security; limited admin access; backups.
+    method:
+      - manual
+      - technical
+    why: A public data table is a breach.
+    severity: P0
+    effort: M
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Review roles and policies; test an anonymous read.
+    nwkPrecedent: NWK enabled RLS and security-definer functions on Supabase.
+  - id: priv.retention
+    category: privacy_data
+    title: Retention and deletion are defined
+    check: How long data is kept and how to request deletion.
+    method:
+      - manual
+    why: Regulators and funders ask.
+    severity: P2
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Write a retention schedule and deletion procedure.
+  - id: priv.third-party-scripts
+    category: privacy_data
+    title: Third-party scripts are inventoried
+    check: Analytics, fonts, embeds, chat, pixels listed with purpose.
+    method:
+      - technical
+    why: Each script is a privacy and performance cost.
+    severity: P2
+    effort: S
+    impact:
+      - SAFETY
+      - PERFORMANCE
+    appliesWhen:
+      all: []
+      any: []
+    fix: Remove unused; self-host fonts where possible.
+  - id: safe.policy-public
+    category: safeguarding
+    title: Safeguarding/child protection policy is published
+    check: A real policy with reporting route, designated lead, screening, training, and mandated-reporter notes.
+    method:
+      - crawl
+      - legal_review
+    why: Funders and parents require it before trusting you with young people.
+    severity: P0
+    effort: M
+    impact:
+      - SAFETY
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - vulnerable_population
+    fix: Publish a policy approved by the board and reviewed by counsel; label drafts honestly.
+    nwkPrecedent: NWK published a labelled draft safeguarding policy pending counsel review.
+  - id: safe.reporting-route
+    category: safeguarding
+    title: How to report a concern is easy to find
+    check: Contact, hotline and emergency guidance in the footer or program pages.
+    method:
+      - crawl
+    why: A hidden route is no route.
+    severity: P0
+    effort: XS
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - vulnerable_population
+    fix: Add a report-a-concern link and crisis lines.
+  - id: safe.photo-minors
+    category: safeguarding
+    title: Photos and names of minors are protected
+    check: No full names with photos, no locations that expose minors, guardian consent.
+    method:
+      - crawl
+      - manual
+    why: Protects children and the organization.
+    severity: P0
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+    fix: Audit images; apply media-consent policy.
+  - id: safe.screening
+    category: safeguarding
+    title: Screening and training for staff and volunteers are described
+    check: Background checks and training stated accurately (no overclaiming).
+    method:
+      - crawl
+      - manual
+      - legal_review
+    why: Overclaiming screening is a liability.
+    severity: P1
+    effort: S
+    impact:
+      - SAFETY
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - volunteers
+    fix: Describe real practices only.
+  - id: safe.crisis-resources
+    category: safeguarding
+    title: Crisis resources are available
+    check: 988, local crisis lines, or domestic-violence lines where relevant.
+    method:
+      - crawl
+    why: Visitors may be in crisis.
+    severity: P2
+    effort: XS
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any:
+        - vulnerable_population
+    fix: Add resource links in the footer.
+  - id: vis.identity-coherent
+    category: visual_design
+    title: Logo, color and type feel like one organization
+    check: Consistent palette, type scale, spacing and imagery; no template leftovers.
+    method:
+      - browser
+      - manual
+    why: Design coherence reads as competence.
+    severity: P2
+    effort: M
+    impact:
+      - BRAND
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Define a small token set and apply it everywhere.
+    nwkPrecedent: NWK got a coherent type and color system.
+  - id: vis.real-imagery
+    category: visual_design
+    title: Imagery is specific to the organization
+    check: Real photos or purposeful illustration, not generic stock; hero is not an empty gradient.
+    method:
+      - browser
+      - manual
+    why: Generic imagery signals a generic organization.
+    severity: P2
+    effort: M
+    impact:
+      - BRAND
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Commission or collect real photos with consent; plan a shoot list.
+    nwkPrecedent: NWK planned a 7-year timelapse hero and a photo request list.
+  - id: vis.slop-check
+    category: visual_design
+    title: No generic AI/template slop
+    check: No purple-gradient hero, 3 identical icon cards, fake stats/testimonials, filler copy.
+    method:
+      - browser
+      - manual
+    why: Slop erodes trust quickly.
+    severity: P2
+    effort: S
+    impact:
+      - BRAND
+    appliesWhen:
+      all: []
+      any: []
+    fix: Replace with specific content and a deliberate layout.
+  - id: vis.contrast
+    category: visual_design
+    title: Text contrast meets WCAG AA
+    check: 4.5:1 body, 3:1 large text and UI components.
+    method:
+      - browser
+      - technical
+    why: Readability and legal risk.
+    severity: P1
+    effort: S
+    impact:
+      - ACCESSIBILITY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Darken text or adjust backgrounds; recheck.
+  - id: ux.nav-clear
+    category: ux_ia
+    title: Navigation is short and labeled by user goals
+    check: 7 or fewer top items; labels like 'Get help', 'Give', 'About'; mobile menu works.
+    method:
+      - browser
+    why: Visitors should find the next step without thought.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Prune the menu; add a primary CTA.
+  - id: ux.primary-cta
+    category: ux_ia
+    title: One primary call to action per page
+    check: Each page has one dominant action and a sensible fallback.
+    method:
+      - browser
+    why: Competing CTAs cancel out.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Choose the action per page; style secondary actions down.
+    nwkPrecedent: NWK made the youth next step primary.
+  - id: ux.footer-complete
+    category: ux_ia
+    title: Footer carries trust links
+    check: Legal name/EIN, privacy, accessibility, contact, donate, social.
+    method:
+      - crawl
+    why: The footer is where diligence starts.
+    severity: P1
+    effort: XS
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Standardize the footer.
+  - id: ux.404-and-redirects
+    category: ux_ia
+    title: Broken links, 404 and old URLs handled
+    check: No broken internal links; custom 404; redirects from old URLs.
+    method:
+      - technical
+    why: Dead ends cost trust and ranking.
+    severity: P2
+    effort: S
+    impact:
+      - SEARCH
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Crawl for broken links monthly.
+  - id: ux.language-access
+    category: ux_ia
+    title: Language access matches the community
+    check: Key pages exist in the languages your community uses; translations reviewed by a native speaker.
+    method:
+      - crawl
+      - manual
+    why: Machine translation errors undermine trust.
+    severity: P1
+    effort: M
+    impact:
+      - TRUST
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - bilingual
+    fix: Get native review; use formal register consistently.
+    nwkPrecedent: NWK applied usted and an es-MX review pass; native review still open.
+  - id: mob.viewport
+    category: mobile
+    title: Mobile viewport is set
+    check: meta viewport present.
+    method:
+      - technical
+    why: Without it pages render desktop-width on phones.
+    severity: P0
+    effort: XS
+    impact:
+      - ACCESSIBILITY
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add width=device-width, initial-scale=1.
+  - id: mob.no-overflow
+    category: mobile
+    title: No horizontal overflow at 320-430px
+    check: Pages scroll vertically only on small phones.
+    method:
+      - browser
+      - technical
+    why: Horizontal scroll is a bounce signal.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Run the viewport audit; fix wide elements.
+    nwkPrecedent: NWK ran viewport and device audits with zero findings.
+  - id: mob.tap-targets
+    category: mobile
+    title: Tap targets are at least 44px
+    check: Buttons and links are comfortable to tap.
+    method:
+      - browser
+    why: Fat-finger errors lose conversions.
+    severity: P2
+    effort: XS
+    impact:
+      - ACCESSIBILITY
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Increase padding on links and buttons.
+  - id: mob.thumb-cta
+    category: mobile
+    title: Primary action is reachable on mobile
+    check: CTA visible without hunting; sticky or near the top.
+    method:
+      - browser
+    why: Most visitors are on phones.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Test on real devices.
+  - id: a11y.image-alt
+    category: accessibility
+    title: Images have meaningful alt text
+    check: Informational images have alt; decorative ones have empty alt.
+    method:
+      - technical
+    why: Screen reader access and SEO.
+    severity: P1
+    effort: S
+    impact:
+      - ACCESSIBILITY
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Write alt text that conveys purpose.
+  - id: a11y.lang
+    category: accessibility
+    title: Page language is declared
+    check: html lang is set and correct per page.
+    method:
+      - technical
+    why: Screen readers choose pronunciation by lang.
+    severity: P1
+    effort: XS
+    impact:
+      - ACCESSIBILITY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Set lang on <html>; mark language switches.
+  - id: a11y.keyboard
+    category: accessibility
+    title: Keyboard-only use works
+    check: Tab order, visible focus, skip link, no traps.
+    method:
+      - browser
+    why: Required for many users.
+    severity: P1
+    effort: M
+    impact:
+      - ACCESSIBILITY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Test with Tab only; fix focus styles.
+  - id: a11y.forms-labels
+    category: accessibility
+    title: Form fields have labels and errors are announced
+    check: Labels tied to inputs; error text clear.
+    method:
+      - browser
+    why: Form failures cost the most.
+    severity: P1
+    effort: S
+    impact:
+      - ACCESSIBILITY
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Add labels and aria-describedby for errors.
+  - id: a11y.motion-video
+    category: accessibility
+    title: Motion respects reduced-motion; video has captions
+    check: prefers-reduced-motion honored; captions/transcripts.
+    method:
+      - browser
+    why: Prevents harm and exclusion.
+    severity: P2
+    effort: S
+    impact:
+      - ACCESSIBILITY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Provide static fallback and captions.
+    nwkPrecedent: NWK timelapse hero planned with a reduced-motion fallback.
+  - id: a11y.headings
+    category: accessibility
+    title: Headings are in logical order
+    check: One h1; no skipped levels.
+    method:
+      - technical
+    why: Navigation by headings.
+    severity: P2
+    effort: XS
+    impact:
+      - ACCESSIBILITY
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Fix heading hierarchy.
+  - id: tech.https
+    category: technical
+    title: HTTPS everywhere
+    check: All pages on HTTPS; HTTP redirects.
+    method:
+      - technical
+    why: Browsers warn on insecure sites.
+    severity: P0
+    effort: XS
+    impact:
+      - TRUST
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Enable HTTPS and HSTS.
+  - id: tech.security-headers
+    category: technical
+    title: Security headers are set
+    check: HSTS, X-Content-Type-Options, CSP, frame protections.
+    method:
+      - technical
+    why: Reduces common attacks.
+    severity: P2
+    effort: S
+    impact:
+      - SAFETY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add headers at the host.
+    nwkPrecedent: NWK added security headers and CSP.
+  - id: tech.robots-sitemap
+    category: technical
+    title: robots.txt and sitemap are correct
+    check: robots.txt not blocking the site; sitemap lists real pages; nothing important noindex.
+    method:
+      - technical
+    why: Accidental noindex hides the site.
+    severity: P1
+    effort: XS
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Fix files; submit sitemap in Search Console.
+    nwkPrecedent: NWK made robots and sitemap dynamic and honored the coming-soon mode.
+  - id: tech.titles-descriptions
+    category: technical
+    title: Unique titles and descriptions
+    check: Each page has a 10-70 char title and 50-170 char description.
+    method:
+      - technical
+    why: Search snippets and click-through.
+    severity: P2
+    effort: S
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Write unique, specific ones.
+    nwkPrecedent: NWK check-seo script enforced this.
+  - id: tech.heading-structure
+    category: technical
+    title: One h1 per page
+    check: Exactly one h1.
+    method:
+      - technical
+    why: Clear page topic.
+    severity: P2
+    effort: XS
+    impact:
+      - SEARCH
+      - ACCESSIBILITY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Fix templates.
+  - id: tech.canonical
+    category: technical
+    title: Canonical URLs set
+    check: Canonical on each page; www/non-www consistent.
+    method:
+      - technical
+    why: Prevents duplicates.
+    severity: P2
+    effort: XS
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add canonicals.
+  - id: tech.structured-data
+    category: technical
+    title: NonprofitOrganization structured data
+    check: JSON-LD with legal name, URL, logo, sameAs profiles.
+    method:
+      - technical
+    why: Helps knowledge panels and consistency.
+    severity: P2
+    effort: S
+    impact:
+      - SEARCH
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add JSON-LD; validate.
+    nwkPrecedent: NWK added NonprofitOrganization JSON-LD.
+  - id: tech.social-preview
+    category: technical
+    title: Social share previews work
+    check: Open Graph title/description/image on key pages.
+    method:
+      - technical
+    why: Shared links represent you.
+    severity: P2
+    effort: XS
+    impact:
+      - BRAND
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add OG tags and a 1200x630 image.
+  - id: tech.broken-links
+    category: technical
+    title: No broken links or fetch errors
+    check: Crawl finds no 4xx/5xx internal links.
+    method:
+      - technical
+    why: Broken links erode trust.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Fix or remove.
+  - id: tech.hreflang
+    category: technical
+    title: Language alternates are declared
+    check: hreflang for translated pages.
+    method:
+      - technical
+    why: Prevents wrong-language results.
+    severity: P2
+    effort: XS
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any:
+        - bilingual
+    fix: Add hreflang pairs.
+    nwkPrecedent: NWK added hreflang for EN/ES.
+  - id: tech.favicon
+    category: technical
+    title: Favicon and app icons exist
+    check: Favicon set and manifest.
+    method:
+      - technical
+    why: Polish and tab recognition.
+    severity: P3
+    effort: XS
+    impact:
+      - BRAND
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a favicon set.
+    nwkPrecedent: NWK added a favicon set.
+  - id: perf.images
+    category: performance
+    title: Images are sized and compressed
+    check: No multi-megabyte hero images; modern formats; lazy-load below the fold.
+    method:
+      - technical
+    why: Slow pages lose visitors on mobile data.
+    severity: P1
+    effort: S
+    impact:
+      - PERFORMANCE
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Compress and size images.
+  - id: perf.core-web-vitals
+    category: performance
+    title: Core Web Vitals pass
+    check: LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile.
+    method:
+      - technical
+    why: Ranking and experience.
+    severity: P2
+    effort: M
+    impact:
+      - PERFORMANCE
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Run PageSpeed Insights; fix the top items.
+  - id: perf.video-hero
+    category: performance
+    title: Hero video is light
+    check: Poster image, small file, no autoplay with sound.
+    method:
+      - technical
+    why: Video can dominate load time.
+    severity: P2
+    effort: S
+    impact:
+      - PERFORMANCE
+    appliesWhen:
+      all: []
+      any: []
+    fix: Use compressed mp4/webm with a poster.
+    nwkPrecedent: NWK planned a build-timelapse script.
+  - id: seo.name-search
+    category: search_footprint
+    title: Searching the org name returns the right things
+    check: First page results are the site, registries and profiles; no wrong-entity confusion.
+    method:
+      - search
+    why: First impression for funders.
+    severity: P1
+    effort: S
+    impact:
+      - SEARCH
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Claim profiles; add structured data; fix name conflicts.
+  - id: seo.negative-results
+    category: search_footprint
+    title: No unresolved negative or confusing results
+    check: Reviews, complaints, old pages or name collisions are understood and addressed.
+    method:
+      - search
+      - manual
+    why: Classify as allegation until verified; respond honestly.
+    severity: P1
+    effort: M
+    impact:
+      - TRUST
+    appliesWhen:
+      all: []
+      any: []
+    fix: Document and respond; correct stale listings.
+  - id: seo.directories
+    category: search_footprint
+    title: Listed in the key directories
+    check: Candid, Charity Navigator, Google Business Profile, state registry, GivingTuesday, Network for Good as applicable.
+    method:
+      - search
+      - record
+    why: Funders and donors check these.
+    severity: P1
+    effort: M
+    impact:
+      - SEARCH
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Use the presence directory and claim each.
+  - id: seo.social-consistent
+    category: search_footprint
+    title: Social profiles are consistent and linked
+    check: Names, bios, logos, links consistent; site links to active profiles only.
+    method:
+      - crawl
+      - search
+    why: Dead profiles look abandoned.
+    severity: P2
+    effort: S
+    impact:
+      - TRUST
+      - BRAND
+    appliesWhen:
+      all: []
+      any: []
+    fix: Retire dead profiles; unify bios.
+    nwkPrecedent: NWK removed an unconfirmed LinkedIn link.
+  - id: seo.google-business
+    category: search_footprint
+    title: Google Business Profile for local services
+    check: Verified profile with hours, category, services.
+    method:
+      - search
+    why: Local people search maps first.
+    severity: P2
+    effort: S
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - has_events
+    fix: Claim and verify.
+  - id: seo.local-keywords
+    category: search_footprint
+    title: Pages answer real local searches
+    check: Program pages mention the place and the question people search.
+    method:
+      - crawl
+      - search
+    why: Local discovery.
+    severity: P3
+    effort: M
+    impact:
+      - SEARCH
+    appliesWhen:
+      all: []
+      any: []
+    fix: Write natural local copy.
+  - id: part.referral-path
+    category: partner_readiness
+    title: Referrers have a clear path
+    check: Schools, agencies and clinicians can refer someone in under two minutes.
+    method:
+      - crawl
+      - browser
+    why: Referral partners drive intake.
+    severity: P1
+    effort: M
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - youth_serving
+        - vulnerable_population
+    fix: Create a referral form and a one-page for partners.
+    nwkPrecedent: NWK built referral, mentor and project forms with RLS storage.
+  - id: part.partner-kit
+    category: partner_readiness
+    title: Partner kit is downloadable
+    check: Logo pack, boilerplate, one-pager, photo permissions.
+    method:
+      - crawl
+    why: Makes it easy to be mentioned.
+    severity: P2
+    effort: S
+    impact:
+      - BRAND
+      - FUNDING
+    appliesWhen:
+      all: []
+      any: []
+    fix: Publish /press or /partners.
+  - id: part.volunteer-path
+    category: partner_readiness
+    title: Volunteer/mentor path exists
+    check: Roles, time, screening, how to apply.
+    method:
+      - crawl
+    why: Volunteer pipelines need a clear entry.
+    severity: P2
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - volunteers
+    fix: Add a role page and form.
+    nwkPrecedent: NWK added a mentor application.
+  - id: part.press-contact
+    category: partner_readiness
+    title: Press contact and boilerplate
+    check: Contact and a two-paragraph boilerplate.
+    method:
+      - crawl
+    why: Journalists need a quick reference.
+    severity: P3
+    effort: XS
+    impact:
+      - BRAND
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a press page.
+  - id: conv.single-metric
+    category: conversion
+    title: The page goal is measurable
+    check: Analytics events for the primary action (form submit, donate click) without invasive tracking.
+    method:
+      - technical
+      - manual
+    why: You cannot improve what you cannot see.
+    severity: P2
+    effort: S
+    impact:
+      - CONVERSION
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add privacy-respecting analytics and event goals.
+  - id: conv.form-friction
+    category: conversion
+    title: Forms are short and reassuring
+    check: Few fields, clear next step, confirmation message and email.
+    method:
+      - browser
+    why: Each field costs completions.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Cut fields; add reassurance copy.
+    nwkPrecedent: NWK shortened intake and added saved drafts.
+  - id: conv.confirmation
+    category: conversion
+    title: Submission confirmation and follow-up
+    check: Visitors see what happens next and receive an acknowledgment within a stated time.
+    method:
+      - browser
+      - manual
+    why: Silence after submit looks like failure.
+    severity: P1
+    effort: S
+    impact:
+      - CONVERSION
+      - TRUST
+    appliesWhen:
+      all: []
+      any:
+        - collects_forms
+    fix: Write a confirmation page and auto-reply; set an SLA.
+  - id: conv.email-capture
+    category: conversion
+    title: Low-commitment way to stay in touch
+    check: Newsletter/updates signup with consent.
+    method:
+      - crawl
+    why: Many visitors are not ready to give or apply.
+    severity: P2
+    effort: S
+    impact:
+      - CONVERSION
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a simple signup.
+    nwkPrecedent: NWK added a waitlist signup.
+  - id: ops.owner-and-process
+    category: ops_maintainability
+    title: Someone owns the site
+    check: Named owner, access list, and a change process.
+    method:
+      - manual
+    why: Abandoned sites decay quickly.
+    severity: P1
+    effort: S
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Assign an owner and a monthly check.
+  - id: ops.accounts-ownership
+    category: ops_maintainability
+    title: The organization owns its domain and accounts
+    check: Domain, hosting, analytics and email are in the org's name with 2FA and a backup admin.
+    method:
+      - manual
+    why: Contractor-held accounts are a continuity risk.
+    severity: P1
+    effort: S
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Transfer ownership; enable 2FA.
+  - id: ops.backups-updates
+    category: ops_maintainability
+    title: Backups and updates are in place
+    check: Backups tested; dependencies/CMS updated; uptime monitor.
+    method:
+      - manual
+      - technical
+    why: Outages and hacks hurt trust.
+    severity: P2
+    effort: M
+    impact:
+      - OPERATIONS
+      - SAFETY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Set a backup and update schedule.
+  - id: ops.content-editable
+    category: ops_maintainability
+    title: Staff can edit content safely
+    check: CMS or documented process; no developer needed for routine changes.
+    method:
+      - manual
+    why: Slow updates cause stale content.
+    severity: P2
+    effort: M
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Provide a CMS and a one-page guide.
+  - id: ops.go-live-switch
+    category: ops_maintainability
+    title: A safe go-live and rollback process exists
+    check: Staging, a switch to hide the site, and a launch checklist.
+    method:
+      - manual
+    why: Prevents publishing unapproved wording.
+    severity: P2
+    effort: S
+    impact:
+      - OPERATIONS
+      - SAFETY
+    appliesWhen:
+      all: []
+      any: []
+    fix: Add a coming-soon mode and launch gates.
+    nwkPrecedent: NWK built SITE_MODE coming-soon and gated live on approvals.
+  - id: ops.docs
+    category: ops_maintainability
+    title: Handoff documentation exists
+    check: README, env var list, deploy steps, who to call.
+    method:
+      - manual
+    why: Reduces key-person risk.
+    severity: P3
+    effort: S
+    impact:
+      - OPERATIONS
+    appliesWhen:
+      all: []
+      any: []
+    fix: Write a short ops runbook.
+    nwkPrecedent: NWK produced handoff docs.

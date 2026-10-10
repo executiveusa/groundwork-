@@ -1,0 +1,32 @@
+{
+  "name": "nonprofit-audit-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "In-house toolkit that audits a nonprofit's website and public web presence, scores it, and plans the repairs.",
+  "type": "module",
+  "bin": {
+    "audit": "./bin/audit.mjs"
+  },
+  "scripts": {
+    "audit": "tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check:kb": "tsx src/cli.ts kb-check"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "cheerio": "^1.0.0",
+    "commander": "^13.1.0",
+    "yaml": "^2.7.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
