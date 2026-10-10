@@ -4,3 +4,4 @@ clients/
 .env
 .env.*
 !.env.example
+*.zip
